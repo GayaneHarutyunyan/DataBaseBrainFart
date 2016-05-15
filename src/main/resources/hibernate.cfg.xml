@@ -17,16 +17,34 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">create</property>
 
-        <mapping class="models.Users"/>
-        <mapping class="models.TestSession"/>
-        <!-- <mapping class="models.Tests"/>
-         <mapping class="models.TestAvailability"/>
-         <mapping class="models.Subjects"/>
-         <mapping class="models.Questions"/>
-         <mapping class="models.QuestionResults"/>
-         <mapping class="models.QuestionConnections"/>
-         <mapping class="models.AnswerOptions"/>
- -->
+
+        <mapping class="model.Users"/>
+        <mapping class="model.TestSession"/>
+        <mapping class="model.Tests"/>
+        <mapping class="model.TestAvailability"/>
+        <mapping class="model.Subjects"/>
+        <mapping class="model.Questions"/>
+        <mapping class="model.QuestionResults"/>
+        <mapping class="model.QuestionConnections"/>
+        <mapping class="model.AnswerOptions"/>
+
+        <mapping class="modelAdmin.Admins"/>
+        <mapping class="modelAdmin.Powers"/>
+
+        <!--
+
+       -->
+               <!--
+               <mapping class="models.Users"/>
+               <mapping class="models.TestSession"/>
+                <mapping class="models.Tests"/>
+                <mapping class="models.TestAvailability"/>
+                <mapping class="models.Subjects"/>
+                <mapping class="models.Questions"/>
+                <mapping class="models.QuestionResults"/>
+                <mapping class="models.QuestionConnections"/>
+                <mapping class="models.AnswerOptions"/>
+        -->
     </session-factory>
 
 </hibernate-configuration>
