@@ -7,31 +7,37 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by mystic on 15.05.2016.
- */
+
 @Entity
 @Table(name = "Question_Results")
-@Getter
-@Setter
-//@NoArgsConstructor
-public class QuestionResults extends Model {
+
+public class QuestionResults implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "test_session_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private TestSession testSessionId;
+
+    @ManyToOne
+    @JoinColumn(name = "qc_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    private QuestionConnections questionConnectionsByQcId;
 
     @Basic
-    @Column(name = "test_session_id")
-    private int testSessionId;
-    @Basic
-    @Column(name = "qc_id")
-    private int qcId;
-
+    @Column(name = "result")
     private int result;
 
+
+/*
     @ManyToOne
-    @JoinColumn(name = "test_session_id", referencedColumnName = "id",insertable=false, updatable=false)
+    @JoinColumn(name = "test_session_id", referencedColumnName = "id", insertable = false, updatable = false)
     private TestSession testSessionByTestSessionId;
 
-    @ManyToOne
-    @JoinColumn(name = "qc_id", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
-    private QuestionConnections questionConnectionsByQcId;
+
+
+
+*/
 
 }

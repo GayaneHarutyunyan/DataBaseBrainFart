@@ -3,14 +3,18 @@ package models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
 
-public class Users extends Model {
+public class Users implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+     private Integer id;
 
     @Basic
     @Column(name = "first_name")
@@ -25,19 +29,14 @@ public class Users extends Model {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "usersByUserId")
+
+
+  /*
+      @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "usersById")
     private Set<TestSession> testSessionsById;
 
-
-    public Users() {
-        super();
-    }
-
-    public Users(Integer id) {
-        super(id);
-    }
-
-
+*/
 
 
 }

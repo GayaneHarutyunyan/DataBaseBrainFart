@@ -3,54 +3,31 @@ package models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.*;
 
 
 @Entity
 @Table(name = "test_session")
-@Getter
-@Setter
-public class TestSession extends Model {
-    @Basic
-    @Column(name = "user_id")
-    private Integer userId;
-    @Basic
-    @Column(name = "test_result")
-    private Integer testResult;
+
+public class TestSession implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @Transient
+    private Users userById;
+
+    @OneToMany(mappedBy = "test_result")
+    @Transient
+    private Set<QuestionResults> testResult;
+
     @Basic
     @Column(name = "submit_date")
     private Date submitDate;
 
-    @ManyToOne
-    @JoinColumn(name="user_id", referencedColumnName = "id", insertable=false, updatable=false)
-    private Users usersByUserId;
-
-    @OneToMany(mappedBy = "testSessionByTestSessionId")
-    private Set<QuestionResults> questionResultsesById;
-
-
-/*
-
-    @OneToMany(mappedBy = "testSessionByTestSessionId")
-    private Set<QuestionResults> questionResultsesById;
-
-
-*/
-
-
-    public TestSession(Integer userId, Integer testResult, Date submitDate) {
-        this.userId = userId;
-        this.testResult = testResult;
-        this.submitDate = submitDate;
-    }
-
-
-    public TestSession() {
-        super();
-    }
-
-    public TestSession(Integer id) {
-        super(id);
-    }
 }

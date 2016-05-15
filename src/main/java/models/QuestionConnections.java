@@ -1,14 +1,17 @@
 package models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
-/**
- * Created by mystic on 15.05.2016.
- */
 @Entity
 @Table(name = "Question_Connections")
-public class QuestionConnections extends Model {
+public class QuestionConnections implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
+
     @Basic
     @Column(name = "test_id")
     private Integer testId;
@@ -17,14 +20,17 @@ public class QuestionConnections extends Model {
     private Integer questionId;
 
     @ManyToOne
-    @JoinColumn(name = "test_id", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
+    @JoinColumn(name = "test_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @Transient
     private Tests testsByTestId;
 
     @ManyToOne
-    @JoinColumn(name = "question_id", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
+    @JoinColumn(name = "question_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @Transient
     private Questions questionsByQuestionId;
 
     @OneToMany(mappedBy = "questionConnectionsByQcId")
+    @Transient
     private Set<QuestionResults> questionResultsesById;
 
 

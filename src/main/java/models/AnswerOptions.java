@@ -3,16 +3,18 @@ package models;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by mystic on 15.05.2016.
- */
+
 @Entity
 @Table(name = "Answer_Options")
-public class AnswerOptions extends Model {
+public class AnswerOptions implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
 
-    @Basic
-    @Column(name = "questions_id")
-    private Integer questionsId;
+    @ManyToOne
+    @JoinColumn(name = "questions_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    private Questions questionsByQuestionsId;
 
     @Basic
     @Column(name = "content")
@@ -21,9 +23,5 @@ public class AnswerOptions extends Model {
     @Basic
     @Column(name = "correctness")
     private boolean correctness;
-
-    @ManyToOne
-    @JoinColumn(name = "questions_id", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
-    private Questions questionsByQuestionsId;
 
 }
