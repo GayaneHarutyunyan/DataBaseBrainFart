@@ -3,24 +3,15 @@ package models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-/**
- * Created by mystic on 15.05.2016.
- */
+
 @Entity
-@Table(name = "TestSession")
+@Table(name = "test_session")
 @Getter
 @Setter
-//@NoArgsConstructor
-public class TestSession implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+public class TestSession extends Model {
     @Basic
     @Column(name = "user_id")
     private Integer userId;
@@ -31,9 +22,8 @@ public class TestSession implements Serializable {
     @Column(name = "submit_date")
     private Date submitDate;
 
-    @Transient
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name="user_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Users usersByUserId;
 
 
@@ -65,5 +55,10 @@ public class TestSession implements Serializable {
 
 
     public TestSession() {
+        super();
+    }
+
+    public TestSession(Integer id) {
+        super(id);
     }
 }

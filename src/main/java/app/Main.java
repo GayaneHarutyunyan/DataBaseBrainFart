@@ -2,10 +2,11 @@ package app;
 
 import models.Users;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -15,25 +16,30 @@ public class Main {
 
     public static void main(String[] args) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
         sessionFactory.close();
+
 /*
         Session session = sessionFactory.openSession();
 
 
-
-
-        Collection<Users> userses = null;
+        List<Object> users = null;
 
         try {
             //Начать транзакцию
             session.beginTransaction();
 
-            Criteria criteria = session.createCriteria(Users.class);
+            //    Criteria criteria = session.createCriteria(Users.class);
             //ищет все value в калонке
             //   criteria.add(Restrictions.eq("kalonka", "value"));
 
+
+            SQLQuery query = session.createSQLQuery("SELECT *FROM users");
+            query.addEntity(Users.class);
+            users = query.list();
+
             //Получает список результатов
-            userses = criteria.list();
+            // users = criteria.list();
             //Применить все изменинииия в таблице
             session.getTransaction().commit();
 
@@ -48,11 +54,14 @@ public class Main {
 
         }
 
-        for (Users users : userses) {
-            System.out.println(users.toString());
+        for (Iterator iterator = users.iterator(); iterator.hasNext(); ) {
+            Users users1 = (Users) iterator.next();
+            System.out.println(users1.toString());
         }
-*/
+        */
+
     }
+
 
 }
 

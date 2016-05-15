@@ -3,21 +3,15 @@ package models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.*;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Getter
 @Setter
-//@NoArgsConstructor
 
-public class Users {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+public class Users extends Model {
+
     @Basic
     @Column(name = "first_name")
     private String firstName;
@@ -31,23 +25,19 @@ public class Users {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Transient
     @OneToMany(mappedBy = "usersByUserId")
-    private Set<TestSession> testSessionsById = new HashSet<>();
-
-    public Users(String firstName, String secondName, String email, String phoneNumber) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Users(Integer id, Set<TestSession> testSessionsById) {
-        this.id = id;
-        this.testSessionsById = testSessionsById;
-    }
+    private Set<TestSession> testSessionsById;
 
 
     public Users() {
+        super();
     }
+
+    public Users(Integer id) {
+        super(id);
+    }
+
+
+
+
 }
