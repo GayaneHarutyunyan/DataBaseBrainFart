@@ -19,7 +19,8 @@ public class AnswerOptions implements Serializable {
     @NotNull
     private Questions questionsId;
 
-    @Basic
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     @NotNull
     @Column(name = "content")
     private String content;

@@ -1,5 +1,7 @@
 package model;
 
+import org.springframework.context.annotation.Lazy;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -13,7 +15,10 @@ public class Questions implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
-    @Basic
+
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     @NotNull
     @Column(name = "content")
     private String content;

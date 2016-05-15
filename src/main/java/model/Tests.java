@@ -24,7 +24,8 @@ public class Tests implements Serializable{
     @NotNull
     private Subjects subjectId;
 
-    @Basic
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     @NotNull
     @Column(name = "description")
     private String description;
