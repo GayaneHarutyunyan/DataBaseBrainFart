@@ -26,24 +26,16 @@ public class TestSession extends Model {
     @JoinColumn(name="user_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Users usersByUserId;
 
+    @OneToMany(mappedBy = "testSessionByTestSessionId")
+    private Set<QuestionResults> questionResultsesById;
 
-    // private Collection<QuestionResults> questionResultsesById;
 
 /*
-    @Transient
-    @OneToMany(mappedBy = "testSessionByTestSessionId")
-    private Set<QuestionResults> questionResultsesById=new HashSet<>();
-
-
 
     @OneToMany(mappedBy = "testSessionByTestSessionId")
-    public Collection<QuestionResults> getQuestionResultsesById() {
-        return questionResultsesById;
-    }
+    private Set<QuestionResults> questionResultsesById;
 
-    public void setQuestionResultsesById(Collection<QuestionResults> questionResultsesById) {
-        this.questionResultsesById = questionResultsesById;
-    }
+
 */
 
 

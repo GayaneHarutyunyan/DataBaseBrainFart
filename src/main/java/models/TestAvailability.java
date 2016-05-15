@@ -9,10 +9,10 @@ import java.sql.Date;
  * Created by mystic on 15.05.2016.
  */
 @Entity
-@Table(name = "TestAvailability")
+@Table(name = "Test_Availability")
 @Getter
 @Setter
-public class TestAvailability {
+public class TestAvailability extends Model{
 
     @Basic
     @Column(name = "test_id")
@@ -23,22 +23,10 @@ public class TestAvailability {
     @Basic
     @Column(name = "end_date")
     private Date endDate;
-/*
+
     @ManyToOne
-    @JoinColumn(name = "test_id", referencedColumnName = "id")
+    @JoinColumn(name = "test_id", referencedColumnName = "id",insertable=false, updatable=false)
     private Tests testsByTestId;
-/*
-
-    @ManyToOne
-    @JoinColumn(name = "test_id", referencedColumnName = "id")
-    public Tests getTestsByTestId() {
-        return testsByTestId;
-    }
-
-    public void setTestsByTestId(Tests testsByTestId) {
-        this.testsByTestId = testsByTestId;
-    }
-*/
 
 
 }

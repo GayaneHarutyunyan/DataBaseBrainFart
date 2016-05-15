@@ -19,23 +19,14 @@
 
         <mapping class="models.Users"/>
         <mapping class="models.TestSession"/>
+        <mapping class="models.Tests"/>
+        <mapping class="models.TestAvailability"/>
+        <mapping class="models.Subjects"/>
+        <mapping class="models.Questions"/>
+        <mapping class="models.QuestionResults"/>
+        <mapping class="models.QuestionConnections"/>
+        <mapping class="models.AnswerOptions"/>
 
-
-        <!--
-              <mapping class="models.Users"/>
-              <mapping class="models.TestSession"/>
-
-
-              <mapping class="models.Tests"/>
-              <mapping class="models.Subjects"/>
-
-              <mapping class="models.QuestionResults"/>
-              <mapping class="models.TestAvailability"/>
-
-              <mapping class="com.brainfart.database.model.QuestionConnections"/>
-              <mapping class="com.brainfart.database.model.Question"/>
-              <mapping class="com.brainfart.database.model.AnswerOptions"/>
-              -->
     </session-factory>
 
 </hibernate-configuration>

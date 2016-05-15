@@ -12,11 +12,7 @@ import java.util.*;
 @Table(name = "Subjects")
 @Getter
 @Setter
-public class Subjects {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
+public class Subjects extends Model{
 
     @Basic
     @Column(name = "subject")

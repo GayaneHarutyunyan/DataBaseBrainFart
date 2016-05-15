@@ -23,43 +23,19 @@ public class Tests implements Serializable {
     private String name;
     @Basic
     @Column(name = "subject_id")
-    private Serializable subjectId;
+    private Integer subjectId;
     @Basic
     @Column(name = "description")
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "subject_id", referencedColumnName = "id", nullable = false,insertable=false, updatable=false)
     private Subjects subjectsBySubjectId;
 
-/*
     @OneToMany(mappedBy = "testsByTestId")
-    private Set<TestAvailability> testAvailabilitiesById=new HashSet<>();
-
-
-    //   private Collection<QuestionConnections> questionConnectionsesById;
-
-
-/*
+    private Set<TestAvailability> testAvailabilitiesById;
 
     @OneToMany(mappedBy = "testsByTestId")
-    public Collection<QuestionConnections> getQuestionConnectionsesById() {
-        return questionConnectionsesById;
-    }
+      private Collection<QuestionConnections> questionConnectionsesById;
 
-    public void setQuestionConnectionsesById(Collection<QuestionConnections> questionConnectionsesById) {
-        this.questionConnectionsesById = questionConnectionsesById;
-    }
-
-    @OneToMany(mappedBy = "testsByTestId")
-    public Collection<TestAvailability> getTestAvailabilitiesById() {
-        return testAvailabilitiesById;
-    }
-
-    public void setTestAvailabilitiesById(Collection<TestAvailability> testAvailabilitiesById) {
-        this.testAvailabilitiesById = testAvailabilitiesById;
-    }
-
-
-*/
 }
