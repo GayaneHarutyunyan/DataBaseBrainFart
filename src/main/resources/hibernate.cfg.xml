@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd" >
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Connection settings -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/BrainFartDB</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">postgres</property>
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+        <!-- Print executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">create</property>
+
+
+        <mapping class="models.Tests"/>
+        <mapping class="models.Subjects"/>
+
+        <!--
+              <mapping class="models.Users"/>
+              <mapping class="models.TestSession"/>
+
+              <mapping class="models.QuestionResults"/>
+              <mapping class="models.TestAvailability"/>
+              <mapping class="com.brainfart.database.model.QuestionConnections"/>
+              <mapping class="com.brainfart.database.model.Question"/>
+              <mapping class="com.brainfart.database.model.AnswerOptions"/>
+              -->
+    </session-factory>
+
+</hibernate-configuration>
