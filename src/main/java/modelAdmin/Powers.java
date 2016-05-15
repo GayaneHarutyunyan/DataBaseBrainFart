@@ -1,16 +1,14 @@
 package modelAdmin;
 
-import modelAdmin.Admins;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Set;
 
-/**
- * Created by mystic on 15.05.2016.
- */
+
 @Entity
-public class Powers {
+public class Powers implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

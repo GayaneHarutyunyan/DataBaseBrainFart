@@ -8,7 +8,6 @@ import java.io.Serializable;
 @Entity
 public class Admins implements Serializable{
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
