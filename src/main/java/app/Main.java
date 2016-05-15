@@ -1,6 +1,5 @@
 package app;
 
-import models.Users;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
