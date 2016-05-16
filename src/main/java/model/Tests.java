@@ -1,5 +1,8 @@
 package model;
 
+import lombok.*;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -8,7 +11,15 @@ import java.util.*;
 
 @Entity
 @Table(name = "Tests")
+@Data
+@Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(doNotUseGetters = true)
+@EqualsAndHashCode(doNotUseGetters = true)
+
 public class Tests implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -40,74 +51,4 @@ public class Tests implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testId")
     private Set<TestAvailability> testAvailabilityes;
-
-
-    @Override
-    public String toString() {
-        return "Tests{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", subjectId=" + subjectId +
-                ", description='" + description + '\'' +
-                ", publicity=" + publicity +
-                ", questionConnectionses=" + questionConnectionses +
-                ", testAvailabilityes=" + testAvailabilityes +
-                '}';
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Subjects getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Subjects subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isPublicity() {
-        return publicity;
-    }
-
-    public void setPublicity(boolean publicity) {
-        this.publicity = publicity;
-    }
-
-    public Set<QuestionConnections> getQuestionConnectionses() {
-        return questionConnectionses;
-    }
-
-    public void setQuestionConnectionses(Set<QuestionConnections> questionConnectionses) {
-        this.questionConnectionses = questionConnectionses;
-    }
-
-    public Set<TestAvailability> getTestAvailabilityes() {
-        return testAvailabilityes;
-    }
-
-    public void setTestAvailabilityes(Set<TestAvailability> testAvailabilityes) {
-        this.testAvailabilityes = testAvailabilityes;
-    }
 }

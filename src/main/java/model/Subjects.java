@@ -1,5 +1,8 @@
 package model;
 
+import lombok.*;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -8,11 +11,20 @@ import java.util.*;
 
 @Entity
 @Table(name = "Subjects")
+@Data
+@Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(doNotUseGetters = true)
+@EqualsAndHashCode(doNotUseGetters = true)
+
 public class Subjects implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
+
     @Basic
     @NotNull
     @Column(name = "subject")
@@ -20,37 +32,4 @@ public class Subjects implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "subjectId")
     private Set<Tests> testses;
-
-    @Override
-    public String toString() {
-        return "Subjects{" +
-                "id=" + id +
-                ", subject='" + subject + '\'' +
-                ", testses=" + testses +
-                '}';
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public Set<Tests> getTestses() {
-        return testses;
-    }
-
-    public void setTestses(Set<Tests> testses) {
-        this.testses = testses;
-    }
 }

@@ -1,5 +1,8 @@
 package model;
 
+import lombok.*;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -8,6 +11,13 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "Test_Availability")
+@Data
+@Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(doNotUseGetters = true)
+@EqualsAndHashCode(doNotUseGetters = true)
+
 public class TestAvailability implements Serializable {
 
     @Id
@@ -23,49 +33,8 @@ public class TestAvailability implements Serializable {
     @NotNull
     @Column(name = "start_date")
     private Date startDate;
+
     @NotNull
     @Column(name = "end_date")
     private Date endDate;
-
-    @Override
-    public String toString() {
-        return "TestAvailability{" +
-                "id=" + id +
-                ", testId=" + testId +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Tests getTestId() {
-        return testId;
-    }
-
-    public void setTestId(Tests testId) {
-        this.testId = testId;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
 }
