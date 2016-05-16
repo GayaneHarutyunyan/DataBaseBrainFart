@@ -1,17 +1,14 @@
 package model;
 
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "Users")
-@Getter @Setter
+
 public class Users implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,15 +23,21 @@ public class Users implements Serializable {
     @Column(name = "second_name")
     private String secondName;
 
-    @Basic
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+            + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+            message = "{invalid.email}")
     @NotNull
-    @Size(min = 7,max = 255)
     @Column(name = "email")
-   private String email;
+    protected String email;
 
-    @Basic
+    @Pattern.List({
+            @Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
+                    message = "{invalid.phone_number} ( ххх ) ххх - хххх"),
+            @Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
+                    message = "{invalid.home_number} ( ххх ) ххх - хххх")
+    })
     @NotNull
-    @Size(min = 2,max = 18)
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -53,7 +56,6 @@ public class Users implements Serializable {
                 ", testSession=" + testSession +
                 '}';
     }
-
 
     public long getId() {
         return id;

@@ -1,7 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 
@@ -30,4 +30,45 @@ public class AnswerOptions implements Serializable {
     @Column(name = "correctness")
     private boolean correctness;
 
+    @Override
+    public String toString() {
+        return "AnswerOptions{" +
+                "id=" + id +
+                ", questionsId=" + questionsId +
+                ", content='" + content + '\'' +
+                ", correctness=" + correctness +
+                '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Questions getQuestionsId() {
+        return questionsId;
+    }
+
+    public void setQuestionsId(Questions questionsId) {
+        this.questionsId = questionsId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean isCorrectness() {
+        return correctness;
+    }
+
+    public void setCorrectness(boolean correctness) {
+        this.correctness = correctness;
+    }
 }

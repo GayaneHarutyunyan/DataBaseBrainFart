@@ -1,11 +1,9 @@
 package model;
 
-import org.springframework.context.annotation.Lazy;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -15,8 +13,6 @@ public class Questions implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
-
-
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @NotNull
@@ -25,12 +21,62 @@ public class Questions implements Serializable {
     @Basic
     @NotNull
     @Column(name = "value")
-    private int value;
-
+    private Integer value;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionId")
     private Set<QuestionConnections> questionConnectionses;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionsId")
     private Set<AnswerOptions> answerOptionses;
+
+    @Override
+    public String toString() {
+        return "Questions{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", value=" + value +
+                ", questionConnectionses=" + questionConnectionses +
+                ", answerOptionses=" + answerOptionses +
+                '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    public Set<AnswerOptions> getAnswerOptionses() {
+        return answerOptionses;
+    }
+
+    public void setAnswerOptionses(Set<AnswerOptions> answerOptionses) {
+        this.answerOptionses = answerOptionses;
+    }
+
+    public Set<QuestionConnections> getQuestionConnectionses() {
+        return questionConnectionses;
+    }
+
+    public void setQuestionConnectionses(Set<QuestionConnections> questionConnectionses) {
+        this.questionConnectionses = questionConnectionses;
+    }
 }

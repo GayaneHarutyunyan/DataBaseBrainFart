@@ -1,7 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -20,15 +20,52 @@ public class TestAvailability implements Serializable {
     @NotNull
     private Tests testId;
 
-
-    @Basic
     @NotNull
     @Column(name = "start_date")
     private Date startDate;
-    @Basic
     @NotNull
     @Column(name = "end_date")
     private Date endDate;
 
+    @Override
+    public String toString() {
+        return "TestAvailability{" +
+                "id=" + id +
+                ", testId=" + testId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Tests getTestId() {
+        return testId;
+    }
+
+    public void setTestId(Tests testId) {
+        this.testId = testId;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 }
