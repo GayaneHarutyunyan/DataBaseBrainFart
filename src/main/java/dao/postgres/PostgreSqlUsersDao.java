@@ -14,10 +14,10 @@ public class PostgreSqlUsersDao implements UsersDao {
     private static Logger log = Logger.getLogger(PostgreSqlUsersDao.class.getName());
 
     @Override
-    public Users create(long id,String firstName, String secondName, String email, String phoneNumber) throws DAOException {
+    public Users create(long id, String firstName, String secondName, String email, String phoneNumber) throws DAOException {
         //создаем нового юзера
-        log.info("Creating new user with login=" + id);
-        String sql = "insert into customers (id, firstName, secondName, email, phoneNumber) values (?,?,?,?,?);";
+        log.info("Creating new user with id=" + id);
+        String sql = "insert into customers (id, email, firstName, secondName, phoneNumber) values (?,?,?,?,?);";
 
         Users users = null;
         Connection connection = null;
@@ -30,9 +30,9 @@ public class PostgreSqlUsersDao implements UsersDao {
                 log.trace("Create prepared statement");
                 preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setLong(1, id);
-                preparedStatement.setString(2, firstName);
-                preparedStatement.setString(3, secondName);
-                preparedStatement.setString(4, email);
+                preparedStatement.setString(2, email);
+                preparedStatement.setString(3, firstName);
+                preparedStatement.setString(4, secondName);
                 preparedStatement.setString(4, phoneNumber);
                 preparedStatement.execute();
                 try {
@@ -40,7 +40,7 @@ public class PostgreSqlUsersDao implements UsersDao {
                     resultSet = preparedStatement.getGeneratedKeys();
                     resultSet.next();
                     log.trace("Create user to return");
-                    users = new Users(resultSet.getString("firstName"), resultSet.getString("secondName"), resultSet.getString("email"), resultSet.getString("phoneNumber"));
+                    users = new Users(resultSet.getString("email"), resultSet.getString("firstName"), resultSet.getString("secondName"), resultSet.getString("phoneNumber"));
                     users.setId(resultSet.getLong("id"));
 
                     log.info("User with id=" + id + " created!");

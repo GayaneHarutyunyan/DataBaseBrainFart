@@ -45,7 +45,7 @@ public class PostgreSqlTestsDao implements TestsDao {
                     resultSet = preparedStatement.getGeneratedKeys();
                     resultSet.next();
                     log.trace("Create group to return");
-                    tests = new Tests( resultSet.getString("description"), resultSet.getString("name"), resultSet.getBoolean("publicity"));
+                    tests = new Tests(resultSet.getString("description"), resultSet.getString("name"), resultSet.getBoolean("publicity"));
                     tests.setId(resultSet.getInt("id"));
 
 
@@ -103,7 +103,7 @@ public class PostgreSqlTestsDao implements TestsDao {
                     resultSet.next();
                     log.trace("Create tests to return");
 
-                    tests = new Tests( resultSet.getString("description"), resultSet.getString("name"), resultSet.getBoolean("publicity"));
+                    tests = new Tests(resultSet.getString("description"), resultSet.getString("name"), resultSet.getBoolean("publicity"));
 
 
                     tests.setId(resultSet.getInt("id"));
