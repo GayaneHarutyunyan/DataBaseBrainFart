@@ -1,7 +1,14 @@
 package dao;
 
-/**
- * Created by mystic on 17.05.2016.
- */
+import exception.DAOException;
+import model.Questions;
+
+
 public interface QuestionDao {
+
+    Questions create(long id, String content, Integer value) throws DAOException;
+
+    Questions read() throws DAOException;
+
+    void delete() throws DAOException;
 }

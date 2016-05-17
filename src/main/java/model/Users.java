@@ -11,12 +11,14 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Users")
-@Data
+//@Data
 @Accessors(chain = true)
-///@AllArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+//@ToString(doNotUseGetters = true)
+//@EqualsAndHashCode(doNotUseGetters = true)
 
 public class Users implements Serializable {
 

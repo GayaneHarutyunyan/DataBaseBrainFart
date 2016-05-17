@@ -10,12 +10,14 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Answer_Options")
-@Data
+//@Data
 @Accessors(chain = true)
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+//@ToString(doNotUseGetters = true)
+//@EqualsAndHashCode(doNotUseGetters = true)
 
 public class AnswerOptions implements Serializable {
 
@@ -39,4 +41,9 @@ public class AnswerOptions implements Serializable {
     @NotNull
     @Column(name = "correctness")
     private boolean correctness;
+
+    public AnswerOptions(String content, boolean correctness) {
+        this.content = content;
+        this.correctness = correctness;
+    }
 }

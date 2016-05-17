@@ -11,12 +11,14 @@ import java.util.*;
 
 @Entity
 @Table(name = "Subjects")
-@Data
+//@Data
 @Accessors(chain = true)
 @AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+//@ToString(doNotUseGetters = true)
+//@EqualsAndHashCode(doNotUseGetters = true)
 
 public class Subjects implements Serializable {
 
@@ -31,4 +33,8 @@ public class Subjects implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "subjectId")
     private Set<Tests> testses;
+
+    public Subjects(String subject) {
+        this.subject = subject;
+    }
 }

@@ -77,34 +77,30 @@ public class DaoFactory {
         }
     }
 
-
-
-/*
-    public GoodsDao getGoodsDao() {
+    public SubjectsDao getSubjectsDao() {
         if (type.equalsIgnoreCase("postgres")) {
-            return new PostgreSqlGoodsDao();
+            return new PostgreSqlSubjectsDao();
         } else {
-            return new PostgreSqlGoodsDao();
+            return new PostgreSqlSubjectsDao();
         }
     }
 
-    public OrderDao getOrderDao() {
+    public QuestionDao getQuestionDao() {
         if (type.equalsIgnoreCase("postgres")) {
-            return new PostgreSqlOrderDao();
+            return new PostgreSqlQuestionDao();
         } else {
-            return new PostgreSqlOrderDao();
+            return new PostgreSqlQuestionDao();
         }
     }
 
-    public OrderLineDao getOrderLineDao() {
+    public AnswerOptionsDao getAnswerOptionsDao() {
         if (type.equalsIgnoreCase("postgres")) {
-            return new PostgreSqlOrderLineDao();
+            return new PostgreSqlAnswerOptionsDao();
         } else {
-            return new PostgreSqlOrderLineDao();
+            return new PostgreSqlAnswerOptionsDao();
         }
     }
 
-*/
 }
 
 

@@ -14,7 +14,7 @@ public class PostgreSqlUsersDao implements UsersDao {
     private static Logger log = Logger.getLogger(PostgreSqlUsersDao.class.getName());
 
     @Override
-    public Users create(long id, String firstName, String secondName, String email, String phoneNumber) throws DAOException {
+    public Users create(long id,String firstName, String secondName, String email, String phoneNumber) throws DAOException {
         //создаем нового юзера
         log.info("Creating new user with login=" + id);
         String sql = "insert into customers (id, firstName, secondName, email, phoneNumber) values (?,?,?,?,?);";

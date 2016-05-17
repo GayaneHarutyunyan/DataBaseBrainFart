@@ -11,12 +11,14 @@ import java.util.*;
 
 @Entity
 @Table(name = "Questions")
-@Data
+//@Data
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+@Getter
+@Setter
+//@ToString(doNotUseGetters = true)
+//@EqualsAndHashCode(doNotUseGetters = true)
 
 public class Questions implements Serializable {
 
@@ -41,4 +43,9 @@ public class Questions implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionsId")
     private Set<AnswerOptions> answerOptionses;
+
+    public Questions(String content, Integer value) {
+        this.content = content;
+        this.value = value;
+    }
 }
