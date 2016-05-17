@@ -1,15 +1,11 @@
 package dao.postgres;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
-import exception.DAOException;
-import dao.UsersDao;
-import dao.DaoFactory;
-import model.Users;
+
+import exception.*;
+import dao.*;
+import model.*;
 import org.apache.log4j.Logger;
 
 
