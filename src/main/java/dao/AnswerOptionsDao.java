@@ -1,12 +1,13 @@
 package dao;
 
 import exception.DAOException;
+import model.AnswerOptions;
 
 public interface AnswerOptionsDao {
 
-    AnswerOptionsDao create(long id, String content, boolean correctness) throws DAOException;
+    AnswerOptions create(long id, String content, boolean correctness) throws DAOException;
 
-    AnswerOptionsDao read(long id) throws DAOException;
+    AnswerOptions read(long id) throws DAOException;
 
     void delete(long id) throws DAOException;
 }
