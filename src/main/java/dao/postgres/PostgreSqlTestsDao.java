@@ -66,7 +66,7 @@ public class PostgreSqlTestsDao implements TestsDao {
                 }
             }
         } catch (SQLException e) {
-            log.warn("Cannot create user", e);
+            log.warn("Cannot create tests", e);
             throw new DAOException("Cannot create tests", e);
         } finally {
             try {
@@ -126,7 +126,7 @@ public class PostgreSqlTestsDao implements TestsDao {
                 }
             }
         } catch (SQLException e) {
-            log.warn("Cannot create user", e);
+            log.warn("Cannot create tests", e);
             throw new DAOException("Cannot read tests", e);
         } finally {
             try {
@@ -135,6 +135,12 @@ public class PostgreSqlTestsDao implements TestsDao {
             } catch (SQLException e) {
                 log.warn("Cannot close connection", e);
             }
+        }
+
+        if (null == tests) {
+            log.debug("Tests not found");
+        } else {
+            log.trace("Tests " + id + " found");
         }
         log.trace("Returning tests");
         return tests;
@@ -165,8 +171,8 @@ public class PostgreSqlTestsDao implements TestsDao {
                 }
             }
         } catch (SQLException e) {
-            log.warn("Cannot create user", e);
-            throw new DAOException("Cannot delete group", e);
+            log.warn("Cannot create tests", e);
+            throw new DAOException("Cannot delete tests", e);
         } finally {
             try {
                 connection.close();

@@ -16,6 +16,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
     public Questions create(long id, String content, Integer value) throws DAOException {
         log.info("Creating new question with id=" + id);
         String sql = "insert into public.questions (content,value) VALUES (?,?)";
+
         Questions questions = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -56,8 +57,8 @@ public class PostgreSqlQuestionDao implements QuestionDao {
                 }
             }
         } catch (SQLException e) {
-            log.warn("Cannot create user", e);
-            throw new DAOException("Cannot create tests", e);
+            log.warn("Cannot create questions", e);
+            throw new DAOException("Cannot create questions", e);
         } finally {
             try {
                 connection.close();
@@ -71,28 +72,108 @@ public class PostgreSqlQuestionDao implements QuestionDao {
     }
 
     @Override
-    public Questions read() throws DAOException {
+    public Questions read(long id) throws DAOException {
+
+        log.trace("Get parameters: id=" + id);
+        String sql = "select from public.questions where id = ?;";
+
         Questions questions = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        try {
+            log.trace("Open connection");
+            connection = daoFactory.getConnection();
+            try {
+                log.trace("Create prepared statement");
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setLong(1, id);
+
+                try {
+                    log.trace("Get result set");
+                    resultSet = preparedStatement.executeQuery();
+                    resultSet.next();
+                    log.trace("Create tests to return");
+                    questions = new Questions(resultSet.getString("content"), resultSet.getInt("value"));
+                    questions.setId(resultSet.getLong("id"));
 
 
+                } finally {
+                    try {
+                        resultSet.close();
+                        log.trace("result set closed");
+                    } catch (SQLException e) {
+                        log.warn("Cannot close result set", e);
+                    }
+                }
+            } finally {
+                try {
+                    preparedStatement.close();
+                    log.trace("statement closed");
+                } catch (SQLException e) {
+                    log.warn("Cannot close statement", e);
+                }
+            }
+        } catch (SQLException e) {
+            log.warn("Cannot create questions", e);
+            throw new DAOException("Cannot read questions", e);
+        } finally {
+            try {
+                connection.close();
+                log.trace("Connection closed");
+            } catch (SQLException e) {
+                log.warn("Cannot close connection", e);
+            }
+        }
+
+        if (null == questions) {
+            log.debug("Questions not found");
+        } else {
+            log.trace("Questions " + id + " found");
+        }
+        log.trace("Return questions");
         return questions;
     }
 
     @Override
-    public void delete() throws DAOException {
-        Questions questions = null;
+    public void delete(long id) throws DAOException {
+
+        log.trace("Get parameters: id=" + id);
+        String sql = "delete from public.questions where id = ?;";
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        try {
+            log.trace("Open connection");
+            connection = daoFactory.getConnection();
+            try {
 
 
-        log.trace("Open connection");
-        connection = daoFactory.getConnection();
-
-
+                log.trace("Create prepared statement");
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setLong(1, id);
+                preparedStatement.executeUpdate();
+                log.info("Questions " + id + " deleted");
+            } finally {
+                try {
+                    preparedStatement.close();
+                    log.trace("statement closed");
+                } catch (SQLException e) {
+                    log.warn("Cannot close statement", e);
+                }
+            }
+        } catch (SQLException e) {
+            log.warn("Cannot create questions", e);
+            throw new DAOException("Cannot delete questions", e);
+        } finally {
+            try {
+                connection.close();
+                log.trace("Connection closed");
+            } catch (SQLException e) {
+                log.warn("Cannot close connection", e);
+            }
+        }
     }
-
 }
+
+

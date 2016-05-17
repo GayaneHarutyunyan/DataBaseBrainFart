@@ -139,7 +139,7 @@ public class PostgreSqlUsersDao implements UsersDao {
     }
 
     @Override
-    public Users update(long id, String firstName, String secondName, String email, String phoneNumber) throws DAOException {
+    public Users update(long id, String email, String firstName, String secondName, String phoneNumber) throws DAOException {
         String sql = "update public.users set firstName = ?, secondName = ?, email = ?, phoneNumber = ?, where id = ?";
 
         Users users = null;
@@ -152,11 +152,10 @@ public class PostgreSqlUsersDao implements UsersDao {
             try {
                 log.trace("Create prepared statement");
                 preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, firstName);
-                preparedStatement.setString(2, secondName);
-                preparedStatement.setString(3, email);
+                preparedStatement.setString(1, email);
+                preparedStatement.setString(2, firstName);
+                preparedStatement.setString(3, secondName);
                 preparedStatement.setString(4, phoneNumber);
-                //  preparedStatement.setString(7, id);
                 preparedStatement.execute();
 
                 try {
@@ -164,8 +163,8 @@ public class PostgreSqlUsersDao implements UsersDao {
                     resultSet = preparedStatement.getGeneratedKeys();
                     resultSet.next();
                     log.trace("Create customer to return");
-                    users = new Users(resultSet.getString("firstName"), resultSet.getString("secondName"),
-                            resultSet.getString("email"), resultSet.getString("phoneNumber"));
+                    users = new Users(resultSet.getString("email"), resultSet.getString("firstName"),
+                            resultSet.getString("secondName"), resultSet.getString("phoneNumber"));
 
 
                 } finally {
