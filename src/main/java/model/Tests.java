@@ -11,12 +11,13 @@ import java.util.*;
 
 @Entity
 @Table(name = "Tests")
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+//@ToString(doNotUseGetters = true)
+//@EqualsAndHashCode(doNotUseGetters = true)
 
 public class Tests implements Serializable {
 
@@ -51,4 +52,11 @@ public class Tests implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testId")
     private Set<TestAvailability> testAvailabilityes;
+
+    public Tests( String description, String name, boolean publicity) {
+        this.description = description;
+        this.name = name;
+        this.publicity = publicity;
+    }
+
 }

@@ -25,7 +25,6 @@ public class Subjects implements Serializable {
     @Column(name = "id")
     private long id;
 
-    @Basic
     @NotNull
     @Column(name = "subject")
     private String subject;

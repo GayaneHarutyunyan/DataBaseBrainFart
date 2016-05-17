@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "Users")
 @Data
 @Accessors(chain = true)
-@AllArgsConstructor
+///@AllArgsConstructor
 @NoArgsConstructor
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true)
@@ -25,7 +25,7 @@ public class Users implements Serializable {
     @Column(name = "id")
     private long id;
 
-    @NonNull
+    @NotNull
     @Column(name = "first_name")
     private String firstName;
 
@@ -53,4 +53,11 @@ public class Users implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "userId")
     private Set<TestSession> testSession;
+
+    public Users(String firstName, String secondName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
 }
