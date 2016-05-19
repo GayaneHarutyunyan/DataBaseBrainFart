@@ -39,10 +39,10 @@ public class Questions implements Serializable {
     private Integer value;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionId")
-    private Set<QuestionConnections> questionConnectionses;
+    private List<QuestionConnections> questionConnectionses=new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionsId")
-    private Set<AnswerOptions> answerOptionses;
+    private List<AnswerOptions> answerOptionses=new ArrayList<>();
 
     public Questions(String content, Integer value) {
         this.content = content;

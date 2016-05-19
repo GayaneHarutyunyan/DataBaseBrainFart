@@ -12,7 +12,7 @@ import java.sql.*;
 
 public class PostgreSqlSubjectsDao implements SubjectsDao {
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
+    private static Logger log = Logger.getLogger(PostgreSqlSubjectsDao.class.getName());
 
 
     @Override

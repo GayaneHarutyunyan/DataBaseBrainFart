@@ -7,7 +7,7 @@ import lombok.experimental.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "Users")
@@ -54,7 +54,7 @@ public class Users implements Serializable {
     private String phoneNumber;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "userId")
-    private Set<TestSession> testSession;
+    private List<TestSession> testSession = new ArrayList<>();
 
     public Users(String firstName, String secondName, String email, String phoneNumber) {
         this.firstName = firstName;

@@ -39,5 +39,5 @@ public class TestSession implements Serializable {
     private Integer testResult;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testSessionId")
-    private Set<QuestionResults> questionResultses;
+    private List<QuestionResults> questionResultses=new ArrayList<>();
 }

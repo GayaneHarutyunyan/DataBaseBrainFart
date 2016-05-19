@@ -1,6 +1,10 @@
 package dao.postgres;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 import exception.*;
@@ -146,6 +150,7 @@ public class PostgreSqlUsersDao implements UsersDao {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+       // Set<TestSession> testSession=new HashSet<>();
         try {
             log.trace("Open connection");
             connection = daoFactory.getConnection();
@@ -198,4 +203,7 @@ public class PostgreSqlUsersDao implements UsersDao {
         return users;
 
     }
+
+
+
 }

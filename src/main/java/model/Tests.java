@@ -48,10 +48,10 @@ public class Tests implements Serializable {
     private boolean publicity;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testsId")
-    private Set<QuestionConnections> questionConnectionses;
+    private List<QuestionConnections> questionConnectionses=new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testId")
-    private Set<TestAvailability> testAvailabilityes;
+    private List<TestAvailability> testAvailabilityes=new ArrayList<>();
 
     public Tests( String description, String name, boolean publicity) {
         this.description = description;

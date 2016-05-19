@@ -14,7 +14,7 @@ public class ValidationModel {
         Validator validator = validatorFactory.getValidator();
         validatorUsers(validator);
         System.out.println("\n");
-        validatorTestSession(validator);
+      /**  validatorTestSession(validator);
         System.out.println("\n");
         validatorTests(validator);
         System.out.println("\n");
@@ -33,6 +33,7 @@ public class ValidationModel {
         validatorAdmins(validator);
         System.out.println("\n");
         validatorPowers(validator);
+       */
     }
 
     private static void validatorAdmins(Validator validator) {
@@ -131,6 +132,7 @@ public class ValidationModel {
         }
     }
 
+
     private static void validatorSubjects(Validator validator) {
         Subjects subjects = new Subjects();
         Set<ConstraintViolation<Subjects>> constrsTests = validator.validate(subjects);
@@ -199,6 +201,8 @@ public class ValidationModel {
 
     private static void validatorUsers(Validator validator) {
         Users users = new Users();
+        users.setPhoneNumber("0635827207");
+        users.setEmail("invalid@email.ru");
         Set<ConstraintViolation<Users>> constrs = validator.validate(users);
 
         for (ConstraintViolation<Users> constr : constrs) {

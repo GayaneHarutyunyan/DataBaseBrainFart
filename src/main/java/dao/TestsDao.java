@@ -14,12 +14,10 @@ public interface TestsDao {
 
     Tests read(long id) throws DAOException;
 
-   // Tests update(long id, String name, Subjects subjectId, String description, boolean publicity) throws DAOException;
+    // Tests update(long id, String name, Subjects subjectId, String description, boolean publicity) throws DAOException;
 
     void delete(long id) throws DAOException;
-/*
-    List<QuestionConnections> getAll() throws DAOException;
 
-    List<TestAvailability> getAllSubgroups(long id) throws DAOException;
-    */
+    List<Tests> getAll() throws DAOException;
+
 }

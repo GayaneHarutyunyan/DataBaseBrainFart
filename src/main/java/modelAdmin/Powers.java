@@ -4,7 +4,7 @@ package modelAdmin;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -21,6 +21,6 @@ public class Powers implements Serializable {
     private String position;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "powersId")
-    private Set<Admins> admin;
+    private List<Admins> admin=new ArrayList<>();
 
 }

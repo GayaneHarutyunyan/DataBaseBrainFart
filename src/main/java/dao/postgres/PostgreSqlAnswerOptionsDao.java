@@ -7,11 +7,13 @@ import model.*;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
+    private static Logger log = Logger.getLogger(PostgreSqlAnswerOptionsDao.class.getName());
 
 
     @Override
@@ -176,5 +178,13 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
         }
 
     }
+
+    @Override
+    public List<AnswerOptions> getAll() throws DAOException {
+
+        List<AnswerOptions> answerOptionses = new ArrayList<>();
+        return answerOptionses;
+    }
+
 
 }
