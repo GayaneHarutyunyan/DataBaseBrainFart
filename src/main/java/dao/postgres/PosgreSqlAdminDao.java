@@ -9,6 +9,7 @@ import java.util.*;
 
 
 public class PosgreSqlAdminDao implements AdminDao {
+
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private static Logger log = Logger.getLogger(PosgreSqlAdminDao.class.getName());
 

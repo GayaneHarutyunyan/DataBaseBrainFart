@@ -14,8 +14,6 @@ public interface TestsDao {
 
     Tests read(long id) throws DAOException;
 
-    // Tests update(long id, String name, Subjects subjectId, String description, boolean publicity) throws DAOException;
-
     void delete(long id) throws DAOException;
 
     List<Tests> getAll() throws DAOException;
