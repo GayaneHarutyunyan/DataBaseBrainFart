@@ -56,7 +56,7 @@ public class PostgreSqlQuestionResultsDao implements QuestionResultsDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot get all testAvailability", e);
+            throw new DAOException("Cannot get all questionResultses", e);
         } finally {
             try {
                 connection.close();
