@@ -185,8 +185,59 @@ public class PostgreSqlTestsDao implements TestsDao {
 
     @Override
     public List<Tests> getAll() throws DAOException {
-
         List<Tests> testses = new ArrayList<>();
+        String sql = "SELECT *FROM public.tests";
+
+        Tests tests = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            log.trace("Open connection ");
+            connection = daoFactory.getConnection();
+            try {
+                log.trace("Create prepared statement");
+                preparedStatement = connection.prepareStatement(sql);
+                try {
+                    log.trace("grt result set");
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+                        log.trace("Create test to add to the set");
+                        tests = new Tests(resultSet.getString("description"), resultSet.getString("name"), resultSet.getBoolean("publicity"));
+                        tests.setId(resultSet.getInt("id"));
+                        testses.add(tests);
+                        log.trace("Tests " + tests.getId() + " added to set");
+                    }
+                } finally {
+                    try {
+                        resultSet.close();
+                        log.trace("result set closed");
+                    } catch (SQLException e) {
+                        log.warn("Cannot close result set", e);
+                    }
+                }
+            } finally {
+                try {
+                    preparedStatement.close();
+                    log.trace("statement closed");
+                } catch (SQLException e) {
+                    log.warn("Cannot close statement", e);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Cannot get all testses", e);
+        } finally {
+            try {
+                connection.close();
+                log.trace("Connection closed");
+            } catch (SQLException e) {
+                log.warn("Cannot close connection", e);
+            }
+        }
+
+        log.trace("Returning testses");
+
         return testses;
     }
 
