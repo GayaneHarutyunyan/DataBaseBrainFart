@@ -2,6 +2,7 @@ package model;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.apache.log4j.Logger;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -21,6 +22,8 @@ import java.util.*;
 //@EqualsAndHashCode(doNotUseGetters = true)
 
 public class TestSession implements Serializable {
+    private static Logger log = Logger.getLogger(TestSession.class.getName());
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,5 +49,7 @@ public class TestSession implements Serializable {
     public TestSession(Date submitDate, Integer testResult) {
         this.submitDate = submitDate;
         this.testResult = testResult;
+        log.trace("Created test session: testResult=" + testResult);
+
     }
 }
