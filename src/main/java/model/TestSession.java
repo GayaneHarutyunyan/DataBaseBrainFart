@@ -11,12 +11,14 @@ import java.util.*;
 
 @Entity
 @Table(name = "Test_Session")
-@Data
-@Accessors(chain = true)
+//@Data
+//@Accessors(chain = true)
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+//@ToString(doNotUseGetters = true)
+//@EqualsAndHashCode(doNotUseGetters = true)
 
 public class TestSession implements Serializable {
 
@@ -39,5 +41,10 @@ public class TestSession implements Serializable {
     private Integer testResult;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testSessionId")
-    private List<QuestionResults> questionResultses=new ArrayList<>();
+    private List<QuestionResults> questionResultses = new ArrayList<>();
+
+    public TestSession(Date submitDate, Integer testResult) {
+        this.submitDate = submitDate;
+        this.testResult = testResult;
+    }
 }

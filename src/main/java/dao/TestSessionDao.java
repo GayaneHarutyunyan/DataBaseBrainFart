@@ -5,10 +5,10 @@ import model.*;
 
 import java.util.*;
 
-/**
- * Created by mystic on 17.05.2016.
- */
+
 public interface TestSessionDao {
 
     List<TestSession> getAll() throws DAOException;
+
+    List<TestSession> getTestSessionByResult(Integer testResult) throws DAOException;
 }
