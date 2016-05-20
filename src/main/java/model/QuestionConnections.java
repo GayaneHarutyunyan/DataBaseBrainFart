@@ -11,12 +11,14 @@ import java.util.*;
 
 @Entity
 @Table(name = "Question_Connections")
-@Data
+//@Data
 @Accessors(chain = true)
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+//@ToString(doNotUseGetters = true)
+//@EqualsAndHashCode(doNotUseGetters = true)
 
 public class QuestionConnections implements Serializable {
 

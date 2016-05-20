@@ -1,19 +1,32 @@
 package modelAdmin;
 
+import lombok.*;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 
 @Entity
-public class Admins implements Serializable{
+@Table(name = "Admins")
+@Accessors(chain = true)
+@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+
+public class Admins implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
 
-    @Basic
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+            + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+            message = "{invalid.email}")
     @NotNull
     @Column(name = "email")
     private String email;
@@ -28,6 +41,11 @@ public class Admins implements Serializable{
     @JoinColumn(name = "powers_id", nullable = false)
     @NotNull
     private Powers powersId;
+
+    public Admins(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
 
 }

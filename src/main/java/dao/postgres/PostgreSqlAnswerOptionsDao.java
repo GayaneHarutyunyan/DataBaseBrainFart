@@ -7,8 +7,7 @@ import model.*;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
@@ -183,6 +182,59 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     public List<AnswerOptions> getAll() throws DAOException {
 
         List<AnswerOptions> answerOptionses = new ArrayList<>();
+
+        String sql = "SELECT * FROM public.answer_options";
+
+
+        AnswerOptions answerOptions = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            log.trace("open connection");
+            connection = daoFactory.getConnection();
+            try {
+                log.trace("Create prepared statement");
+                preparedStatement = connection.prepareStatement(sql);
+                try {
+                    log.trace("Get result set");
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+                        log.trace("Create answerOptions to add to the set");
+
+                        answerOptions = new AnswerOptions(resultSet.getString("content"), resultSet.getBoolean("correctness"));
+                        answerOptions.setId(resultSet.getLong("id"));
+                        answerOptionses.add(answerOptions);
+                        log.trace("AnswerOptions " + answerOptions.getId() + " added to set");
+                    }
+                } finally {
+                    try {
+                        resultSet.close();
+                        log.trace("result set closed");
+                    } catch (SQLException e) {
+                        log.warn("Cannot close result set", e);
+                    }
+                }
+            } finally {
+                try {
+                    preparedStatement.close();
+                    log.trace("statement closed");
+                } catch (SQLException e) {
+                    log.warn("Cannot close statement", e);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Cannot get all answerOptionses", e);
+        } finally {
+            try {
+                connection.close();
+                log.trace("Connection closed");
+            } catch (SQLException e) {
+                log.warn("Cannot close connection", e);
+            }
+        }
+        log.trace("Returning answerOptionses");
         return answerOptionses;
     }
 

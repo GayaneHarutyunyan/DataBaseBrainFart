@@ -10,12 +10,14 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Question_Results")
-@Data
-@Accessors(chain = true)
+//@Data
+//@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+@Getter
+@Setter
+//@ToString(doNotUseGetters = true)
+//@EqualsAndHashCode(doNotUseGetters = true)
 
 public class QuestionResults implements Serializable {
 
@@ -38,4 +40,8 @@ public class QuestionResults implements Serializable {
     @NotNull
     @Column(name = "result")
     private Integer result;
+
+    public QuestionResults(Integer result) {
+        this.result = result;
+    }
 }

@@ -2,6 +2,7 @@ package model;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.apache.log4j.Logger;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -11,14 +12,17 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "Test_Availability")
-@Data
-@Accessors(chain = true)
+//@Data
+//@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+@Getter
+@Setter
+//@ToString(doNotUseGetters = true)
+//@EqualsAndHashCode(doNotUseGetters = true)
 
 public class TestAvailability implements Serializable {
+    private static Logger log = Logger.getLogger(TestSession.class.getName());
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,4 +41,10 @@ public class TestAvailability implements Serializable {
     @NotNull
     @Column(name = "end_date")
     private Date endDate;
+
+    public TestAvailability(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        log.trace("Timing of the test operation");
+    }
 }
