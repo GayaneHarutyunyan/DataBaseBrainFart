@@ -13,11 +13,18 @@ import org.apache.log4j.Logger;
 public class DaoFactory {
 
     private static DaoFactory daoFactory;
-    private static String type;
-    private String user;
-    private String password;
-    private String url;
-    private String driver;
+    private static String type = "";
+    private String user = "";
+    private String password = "";
+    private String url = "";
+    private String driver = "";
+
+    public DaoFactory(final String user, final String password, final String url, final String driver) {
+        this.user = user;
+        this.password = password;
+        this.url = url;
+        this.driver = driver;
+    }
 
     private static Logger log = Logger.getLogger(DaoFactory.class.getName());
 
@@ -40,6 +47,7 @@ public class DaoFactory {
         }
         return daoFactory;
     }
+
 
     public Connection getConnection() throws DaoRuntimeException {
         log.trace("Driver manager get connection");
