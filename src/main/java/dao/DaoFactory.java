@@ -13,19 +13,11 @@ import org.apache.log4j.Logger;
 public class DaoFactory {
 
     private static DaoFactory daoFactory;
-    private static String type = "";
-    private String user = "";
-    private String password = "";
-    private String url = "";
-    private String driver = "";
-
-    public DaoFactory(final String user, final String password, final String url, final String driver) {
-        this.user = user;
-        this.password = password;
-        this.url = url;
-        this.driver = driver;
-    }
-
+    private static String type;
+    private String user;
+    private String password;
+    private String url;
+    private String driver;
     private static Logger log = Logger.getLogger(DaoFactory.class.getName());
 
     private DaoFactory() {
@@ -40,6 +32,19 @@ public class DaoFactory {
         }
     }
 
+    private void loadProperties() {
+        Properties properties = new Properties();
+        try {
+            properties.load(DaoFactory.class.getResourceAsStream("/db.properties"));
+            type = properties.getProperty("type");
+            user = properties.getProperty("user");
+            password = properties.getProperty("password");
+            url = properties.getProperty("url");
+            driver = properties.getProperty("driver");
+        } catch (IOException e) {
+            throw new NoDBPropertiesException("Can't read file", e);
+        }
+    }
 
     public static DaoFactory getInstance() {
         if (null == daoFactory) {
@@ -58,19 +63,6 @@ public class DaoFactory {
         }
     }
 
-    private void loadProperties() {
-        Properties properties = new Properties();
-        try {
-            properties.load(DaoFactory.class.getResourceAsStream("/db.properties"));
-            type = properties.getProperty("type");
-            user = properties.getProperty("user");
-            password = properties.getProperty("password");
-            url = properties.getProperty("url");
-            driver = properties.getProperty("driver");
-        } catch (IOException e) {
-            throw new NoDBPropertiesException("Can't read file", e);
-        }
-    }
 
     public UsersDao getUsersDao() {
         return new PostgreSqlUsersDao();
