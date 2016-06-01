@@ -65,46 +65,25 @@ public class DaoFactory {
     }
 
     public UsersDao getUsersDao() {
-        if (type.equalsIgnoreCase("postgres")) {
-            return new PostgreSqlUsersDao();
-        } else {
-            return new PostgreSqlUsersDao();
-        }
+        return new PostgreSqlUsersDao();
+
     }
 
     public TestsDao getTestsDao() {
-        /*
-        if (type.equalsIgnoreCase("postgres")) {
-            return new PostgreSqlTestsDao();
-        } else {
-            return new PostgreSqlTestsDao();
-        }
-        */
         return new PostgreSqlTestsDao();
     }
 
     public SubjectsDao getSubjectsDao() {
-        if (type.equalsIgnoreCase("postgres")) {
-            return new PostgreSqlSubjectsDao();
-        } else {
-            return new PostgreSqlSubjectsDao();
-        }
+        return new PostgreSqlSubjectsDao();
     }
 
     public QuestionDao getQuestionDao() {
-        if (type.equalsIgnoreCase("postgres")) {
-            return new PostgreSqlQuestionDao();
-        } else {
-            return new PostgreSqlQuestionDao();
-        }
+        return new PostgreSqlQuestionDao();
     }
 
     public AnswerOptionsDao getAnswerOptionsDao() {
-        if (type.equalsIgnoreCase("postgres")) {
-            return new PostgreSqlAnswerOptionsDao();
-        } else {
-            return new PostgreSqlAnswerOptionsDao();
-        }
+        return new PostgreSqlAnswerOptionsDao();
+
     }
 
 }
