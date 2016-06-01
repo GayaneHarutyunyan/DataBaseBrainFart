@@ -69,20 +69,41 @@ public class DaoFactory {
 
     }
 
+    public TestSessionDao getTestSessionDao() {
+        return new PostgresSqlTestSessionDao();
+    }
+
     public TestsDao getTestsDao() {
         return new PostgreSqlTestsDao();
+    }
+
+    public TestAvailabilityDao getTestAvailabilityDao() {
+        return new PostgreSqlTestAvailabilityDao();
     }
 
     public SubjectsDao getSubjectsDao() {
         return new PostgreSqlSubjectsDao();
     }
 
+    public QuestionResultsDao getQuestionResultsDao() {
+        return new PostgreSqlQuestionResultsDao();
+    }
+
     public QuestionDao getQuestionDao() {
         return new PostgreSqlQuestionDao();
     }
 
+    public QuestionConnectionsDao getQuestionConnectionsDao() {
+        return new PostgreSqlQuestionConnectionsDao();
+    }
+
     public AnswerOptionsDao getAnswerOptionsDao() {
         return new PostgreSqlAnswerOptionsDao();
+
+    }
+
+    public AdminDao getAdminDao() {
+        return new PosgreSqlAdminDao();
 
     }
 
