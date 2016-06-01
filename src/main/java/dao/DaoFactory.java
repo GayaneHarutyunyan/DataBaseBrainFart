@@ -23,13 +23,16 @@ public class DaoFactory {
 
     private DaoFactory() {
         loadProperties();
+
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            log.error("Driver not found\n", e);
+            log.error("ERROR: postgresql.Driver not found!\n", e);
+            return;
         }
     }
+
 
     public static DaoFactory getInstance() {
         if (null == daoFactory) {
@@ -38,12 +41,12 @@ public class DaoFactory {
         return daoFactory;
     }
 
-    public Connection getConnection() throws DAOException {
+    public Connection getConnection() throws DaoRuntimeException {
         log.trace("Driver manager get connection");
         try {
             return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
-            throw new DAOException("No connection to DB", e);
+            throw new DaoRuntimeException("No connection to DB", e);
         }
     }
 
@@ -70,11 +73,14 @@ public class DaoFactory {
     }
 
     public TestsDao getTestsDao() {
+        /*
         if (type.equalsIgnoreCase("postgres")) {
             return new PostgreSqlTestsDao();
         } else {
             return new PostgreSqlTestsDao();
         }
+        */
+        return new PostgreSqlTestsDao();
     }
 
     public SubjectsDao getSubjectsDao() {

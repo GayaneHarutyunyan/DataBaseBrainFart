@@ -1,6 +1,6 @@
 package dao;
 
-import exception.DAOException;
+import exception.DaoRuntimeException;
 import model.*;
 
 import java.util.*;
@@ -8,5 +8,5 @@ import java.util.*;
 
 public interface QuestionResultsDao {
 
-    List<QuestionResults> getAll() throws DAOException;
+    List<QuestionResults> getAll() throws DaoRuntimeException;
 }

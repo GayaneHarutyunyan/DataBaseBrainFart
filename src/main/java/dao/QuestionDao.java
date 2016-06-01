@@ -1,14 +1,14 @@
 package dao;
 
-import exception.DAOException;
+import exception.DaoRuntimeException;
 import model.Questions;
 
 
 public interface QuestionDao {
 
-    Questions create(long id, String content, Integer value) throws DAOException;
+    Questions create(long id, String content, Integer value) throws DaoRuntimeException;
 
-    Questions read(long id) throws DAOException;
+    Questions read(long id) throws DaoRuntimeException;
 
-    void delete(long id) throws DAOException;
+    void delete(long id) throws DaoRuntimeException;
 }

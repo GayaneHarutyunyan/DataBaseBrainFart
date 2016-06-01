@@ -13,7 +13,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
     private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
 
     @Override
-    public Questions create(long id, String content, Integer value) throws DAOException {
+    public Questions create(long id, String content, Integer value) throws DaoRuntimeException {
         log.info("Creating new question with id=" + id);
         String sql = "insert into public.questions (content,value) VALUES (?,?)";
 
@@ -58,7 +58,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create questions", e);
-            throw new DAOException("Cannot create questions", e);
+            throw new DaoRuntimeException("Cannot create questions", e);
         } finally {
             try {
                 connection.close();
@@ -72,7 +72,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
     }
 
     @Override
-    public Questions read(long id) throws DAOException {
+    public Questions read(long id) throws DaoRuntimeException {
 
         log.trace("Get parameters: id=" + id);
         String sql = "select from public.questions where id = ?;";
@@ -116,7 +116,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create questions", e);
-            throw new DAOException("Cannot read questions", e);
+            throw new DaoRuntimeException("Cannot read questions", e);
         } finally {
             try {
                 connection.close();
@@ -136,7 +136,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
     }
 
     @Override
-    public void delete(long id) throws DAOException {
+    public void delete(long id) throws DaoRuntimeException {
 
         log.trace("Get parameters: id=" + id);
         String sql = "delete from public.questions where id = ?;";
@@ -164,7 +164,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create questions", e);
-            throw new DAOException("Cannot delete questions", e);
+            throw new DaoRuntimeException("Cannot delete questions", e);
         } finally {
             try {
                 connection.close();

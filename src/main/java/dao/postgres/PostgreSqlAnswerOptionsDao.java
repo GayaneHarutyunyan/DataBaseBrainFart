@@ -16,7 +16,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
 
 
     @Override
-    public AnswerOptions create(long id, String content, boolean correctness) throws DAOException {
+    public AnswerOptions create(long id, String content, boolean correctness) throws DaoRuntimeException {
         String sql = "INSERT INTO public.answer_options (content,correctness) VALUES (?,?)";
 
 
@@ -59,7 +59,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create answerOptions", e);
-            throw new DAOException("Cannot create answerOptions", e);
+            throw new DaoRuntimeException("Cannot create answerOptions", e);
         } finally {
             try {
                 connection.close();
@@ -74,7 +74,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     }
 
     @Override
-    public AnswerOptions read(long id) throws DAOException {
+    public AnswerOptions read(long id) throws DaoRuntimeException {
 
         log.trace("Get parameters: id=" + id);
         String sql = "select from public.answer_options where id = ?;";
@@ -118,7 +118,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create AnswerOptions", e);
-            throw new DAOException("Cannot read AnswerOptions", e);
+            throw new DaoRuntimeException("Cannot read AnswerOptions", e);
         } finally {
             try {
                 connection.close();
@@ -139,7 +139,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     }
 
     @Override
-    public void delete(long id) throws DAOException {
+    public void delete(long id) throws DaoRuntimeException {
         log.trace("Get parameters: id=" + id);
         String sql = "delete from public.answer_options where id = ?;";
 
@@ -166,7 +166,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create AnswerOptions", e);
-            throw new DAOException("Cannot delete AnswerOptions", e);
+            throw new DaoRuntimeException("Cannot delete AnswerOptions", e);
         } finally {
             try {
                 connection.close();
@@ -179,7 +179,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     }
 
     @Override
-    public List<AnswerOptions> getAll() throws DAOException {
+    public List<AnswerOptions> getAll() throws DaoRuntimeException {
 
         List<AnswerOptions> answerOptionses = new ArrayList<>();
 
@@ -225,7 +225,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot get all answerOptionses", e);
+            throw new DaoRuntimeException("Cannot get all answerOptionses", e);
         } finally {
             try {
                 connection.close();

@@ -1,10 +1,6 @@
 package dao.postgres;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 
 import exception.*;
@@ -18,7 +14,7 @@ public class PostgreSqlUsersDao implements UsersDao {
     private static Logger log = Logger.getLogger(PostgreSqlUsersDao.class.getName());
 
     @Override
-    public Users create(long id, String firstName, String secondName, String email, String phoneNumber) throws DAOException {
+    public Users create(long id, String firstName, String secondName, String email, String phoneNumber) throws DaoRuntimeException {
         //создаем нового юзера
         log.info("Creating new user with id=" + id);
         String sql = "insert into customers (id, email, firstName, secondName, phoneNumber) values (?,?,?,?,?);";
@@ -66,7 +62,7 @@ public class PostgreSqlUsersDao implements UsersDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create user", e);
-            throw new DAOException("Cannot create user", e);
+            throw new DaoRuntimeException("Cannot create user", e);
         } finally {
             try {
                 connection.close();
@@ -80,7 +76,7 @@ public class PostgreSqlUsersDao implements UsersDao {
     }
 
     @Override
-    public Users read(long id) throws DAOException {
+    public Users read(long id) throws DaoRuntimeException {
         log.trace("Looking for customer with id=" + id);
         String sql = "select * from public.users where id = ?;";
 
@@ -123,7 +119,7 @@ public class PostgreSqlUsersDao implements UsersDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot read user", e);
+            throw new DaoRuntimeException("Cannot read user", e);
         } finally {
             try {
                 connection.close();
@@ -143,7 +139,7 @@ public class PostgreSqlUsersDao implements UsersDao {
     }
 
     @Override
-    public Users update(long id, String email, String firstName, String secondName, String phoneNumber) throws DAOException {
+    public Users update(long id, String email, String firstName, String secondName, String phoneNumber) throws DaoRuntimeException {
         String sql = "update public.users set firstName = ?, secondName = ?, email = ?, phoneNumber = ?, where id = ?";
 
         Users users = null;
@@ -189,7 +185,7 @@ public class PostgreSqlUsersDao implements UsersDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot update user ", e);
+            throw new DaoRuntimeException("Cannot update user ", e);
         } finally {
             try {
                 connection.close();

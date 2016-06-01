@@ -15,7 +15,7 @@ public class PosgreSqlAdminDao implements AdminDao {
     private static Logger log = Logger.getLogger(PosgreSqlAdminDao.class.getName());
 
     @Override
-    public List<Admins> getAll() throws DAOException {
+    public List<Admins> getAll() throws DaoRuntimeException {
         List<Admins> adminses = new ArrayList<>();
         String sql = "SELECT * FROM public.admins";
 
@@ -57,7 +57,7 @@ public class PosgreSqlAdminDao implements AdminDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot get all adminses", e);
+            throw new DaoRuntimeException("Cannot get all adminses", e);
         } finally {
             try {
                 connection.close();

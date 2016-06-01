@@ -19,7 +19,7 @@ public class PostgreSqlTestsDao implements TestsDao {
     private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
 
     @Override
-    public Tests create(Subjects subjectId, String description, String name, boolean publicity) throws DAOException {
+    public Tests create(Subjects subjectId, String description, String name, boolean publicity) throws DaoRuntimeException {
         log.trace("Get parameters: name=" + name + ", subjectId=" + subjectId + ", description=" + description + ", publicity" + publicity);
         String sql = "insert into public.tests (subjectId, description, name,publicity) values (?, ?,?,?)";
 
@@ -67,7 +67,7 @@ public class PostgreSqlTestsDao implements TestsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create tests", e);
-            throw new DAOException("Cannot create tests", e);
+            throw new DaoRuntimeException("Cannot create tests", e);
         } finally {
             try {
                 connection.close();
@@ -81,7 +81,7 @@ public class PostgreSqlTestsDao implements TestsDao {
     }
 
     @Override
-    public Tests read(long id) throws DAOException {
+    public Tests read(long id) throws DaoRuntimeException {
         log.trace("Get parameters: id=" + id);
         String sql = "select from public.tests where id = ?;";
 
@@ -127,7 +127,7 @@ public class PostgreSqlTestsDao implements TestsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create tests", e);
-            throw new DAOException("Cannot read tests", e);
+            throw new DaoRuntimeException("Cannot read tests", e);
         } finally {
             try {
                 connection.close();
@@ -147,7 +147,7 @@ public class PostgreSqlTestsDao implements TestsDao {
     }
 
     @Override
-    public void delete(long id) throws DAOException {
+    public void delete(long id) throws DaoRuntimeException {
         log.trace("Get parameters: id=" + id);
         String sql = "delete from public.tests where id = ?;";
 
@@ -172,7 +172,7 @@ public class PostgreSqlTestsDao implements TestsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create tests", e);
-            throw new DAOException("Cannot delete tests", e);
+            throw new DaoRuntimeException("Cannot delete tests", e);
         } finally {
             try {
                 connection.close();
@@ -184,7 +184,7 @@ public class PostgreSqlTestsDao implements TestsDao {
     }
 
     @Override
-    public List<Tests> getAll() throws DAOException {
+    public List<Tests> getAll() throws DaoRuntimeException {
         List<Tests> testses = new ArrayList<>();
         String sql = "SELECT *FROM public.tests";
 
@@ -226,7 +226,7 @@ public class PostgreSqlTestsDao implements TestsDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot get all testses", e);
+            throw new DaoRuntimeException("Cannot get all testses", e);
         } finally {
             try {
                 connection.close();

@@ -16,7 +16,7 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
 
 
     @Override
-    public Subjects create(long id, String subject) throws DAOException {
+    public Subjects create(long id, String subject) throws DaoRuntimeException {
 
         log.info("Creating new subject with id=" + id);
         String sql = "insert into public.subjects (subject) values (?)";
@@ -62,7 +62,7 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create Subjects", e);
-            throw new DAOException("Cannot create Subjects", e);
+            throw new DaoRuntimeException("Cannot create Subjects", e);
         } finally {
             try {
                 connection.close();
@@ -79,7 +79,7 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
     }
 
     @Override
-    public Subjects read(long id) throws DAOException {
+    public Subjects read(long id) throws DaoRuntimeException {
 
         log.trace("Get parameters: id=" + id);
         String sql = "select from public.subjects where id = ?;";
@@ -124,7 +124,7 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create Subjects", e);
-            throw new DAOException("Cannot read Subjects", e);
+            throw new DaoRuntimeException("Cannot read Subjects", e);
         } finally {
             try {
                 connection.close();
@@ -144,7 +144,7 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
     }
 
     @Override
-    public void delete(long id) throws DAOException {
+    public void delete(long id) throws DaoRuntimeException {
 
         log.trace("Get parameters: id=" + id);
         String sql = "delete from public.subjects where id = ?;";
@@ -171,7 +171,7 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create Subjects", e);
-            throw new DAOException("Cannot delete Subjects", e);
+            throw new DaoRuntimeException("Cannot delete Subjects", e);
         } finally {
             try {
                 connection.close();

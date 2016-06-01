@@ -15,7 +15,7 @@ public class PostgreSqlTestAvailabilityDao implements TestAvailabilityDao {
     private static Logger log = Logger.getLogger(PostgreSqlTestAvailabilityDao.class.getName());
 
     @Override
-    public List<TestAvailability> getAll() throws DAOException {
+    public List<TestAvailability> getAll() throws DaoRuntimeException {
         List<TestAvailability> testAvailabilityes = new ArrayList<>();
         String sql = "SELECT * FROM public.test_availability";
 
@@ -58,7 +58,7 @@ public class PostgreSqlTestAvailabilityDao implements TestAvailabilityDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot get all testAvailability", e);
+            throw new DaoRuntimeException("Cannot get all testAvailability", e);
         } finally {
             try {
                 connection.close();

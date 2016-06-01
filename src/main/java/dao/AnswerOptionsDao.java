@@ -1,17 +1,17 @@
 package dao;
 
-import exception.DAOException;
+import exception.DaoRuntimeException;
 import model.AnswerOptions;
 
 import java.util.List;
 
 public interface AnswerOptionsDao {
 
-    AnswerOptions create(long id, String content, boolean correctness) throws DAOException;
+    AnswerOptions create(long id, String content, boolean correctness) throws DaoRuntimeException;
 
-    AnswerOptions read(long id) throws DAOException;
+    AnswerOptions read(long id) throws DaoRuntimeException;
 
-    void delete(long id) throws DAOException;
+    void delete(long id) throws DaoRuntimeException;
 
-    List<AnswerOptions> getAll() throws DAOException;
+    List<AnswerOptions> getAll() throws DaoRuntimeException;
 }

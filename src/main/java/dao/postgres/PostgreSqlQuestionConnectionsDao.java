@@ -16,7 +16,7 @@ public class PostgreSqlQuestionConnectionsDao implements QuestionConnectionsDao 
     private static Logger log = Logger.getLogger(PostgreSqlQuestionConnectionsDao.class.getName());
 
     @Override
-    public List<QuestionConnections> getAll() throws DAOException {
+    public List<QuestionConnections> getAll() throws DaoRuntimeException {
         List<QuestionConnections> questionConnectionses = new ArrayList<>();
         String sql = "SELECT * FROM public.question_results";
 
@@ -58,7 +58,7 @@ public class PostgreSqlQuestionConnectionsDao implements QuestionConnectionsDao 
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot get all questionConnections", e);
+            throw new DaoRuntimeException("Cannot get all questionConnections", e);
         } finally {
             try {
                 connection.close();

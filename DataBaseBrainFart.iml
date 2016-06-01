@@ -18,9 +18,18 @@
         <setting name="provider-name" value="" />
         <datasource-mapping>
           <factory-entry name="noname-a.xml@0" value="a1a75c61-151f-45cf-84b5-2fabd1604a96" />
-          <factory-entry name="persistenceUnit" value="a1a75c61-151f-45cf-84b5-2fabd1604a96" />
+          <factory-entry name="persistenceUnit" value="b3f35783-c756-47e5-b31e-f2676cc21e68" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/META-INF/persistence.xml" />
+      </configuration>
+    </facet>
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="hibernate.cfg.xml" />
+        </datasource-map>
+        <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
     </facet>
   </component>
@@ -137,5 +146,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.2.6.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:4.2.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:15.0" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
   </component>
 </module>

@@ -14,7 +14,7 @@ public class PostgreSqlQuestionResultsDao implements QuestionResultsDao {
     private static Logger log = Logger.getLogger(PostgreSqlQuestionResultsDao.class.getName());
 
     @Override
-    public List<QuestionResults> getAll() throws DAOException {
+    public List<QuestionResults> getAll() throws DaoRuntimeException {
         List<QuestionResults> questionResultses = new ArrayList<>();
         String sql = "SELECT * FROM public.question_results";
 
@@ -56,7 +56,7 @@ public class PostgreSqlQuestionResultsDao implements QuestionResultsDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot get all questionResultses", e);
+            throw new DaoRuntimeException("Cannot get all questionResultses", e);
         } finally {
             try {
                 connection.close();

@@ -1,6 +1,6 @@
 package dao;
 
-import exception.DAOException;
+import exception.DaoRuntimeException;
 import model.*;
 
 import java.util.*;
@@ -8,7 +8,7 @@ import java.util.*;
 
 public interface TestSessionDao {
 
-    List<TestSession> getAll() throws DAOException;
+    List<TestSession> getAll() throws DaoRuntimeException;
 
-    List<TestSession> getTestSessionByResult(Integer testResult) throws DAOException;
+    List<TestSession> getTestSessionByResult(Integer testResult) throws DaoRuntimeException;
 }

@@ -16,7 +16,7 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
     private static Logger log = Logger.getLogger(PostgresSqlTestSessionDao.class.getName());
 
     @Override
-    public List<TestSession> getAll() throws DAOException {
+    public List<TestSession> getAll() throws DaoRuntimeException {
 
         List<TestSession> testSession = new ArrayList<>();
 
@@ -61,7 +61,7 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot get all test Session", e);
+            throw new DaoRuntimeException("Cannot get all test Session", e);
         } finally {
             try {
                 connection.close();
@@ -75,7 +75,7 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
     }
 
     @Override
-    public List<TestSession> getTestSessionByResult(Integer testResult) throws DAOException {
+    public List<TestSession> getTestSessionByResult(Integer testResult) throws DaoRuntimeException {
         List<TestSession> testSessions = new ArrayList<>();
         String sql = "SELECT * FROM public.test_session where test_result=?";
 
@@ -120,7 +120,7 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DAOException("Cannot get testSession by testResult=" + testResult, e);
+            throw new DaoRuntimeException("Cannot get testSession by testResult=" + testResult, e);
         } finally {
             try {
                 connection.close();

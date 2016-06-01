@@ -1,10 +1,10 @@
 package dao;
 
-import exception.DAOException;
+import exception.DaoRuntimeException;
 import model.*;
 
 import java.util.*;
 
 public interface QuestionConnectionsDao {
-    List<QuestionConnections> getAll() throws DAOException;
+    List<QuestionConnections> getAll() throws DaoRuntimeException;
 }

@@ -1,6 +1,6 @@
 package dao;
 
-import exception.DAOException;
+import exception.DaoRuntimeException;
 import modelAdmin.Admins;
 
 import java.util.List;
@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface AdminDao {
 
-    List<Admins> getAll() throws DAOException;
+    List<Admins> getAll() throws DaoRuntimeException;
 }
