@@ -31,6 +31,6 @@ public class Powers implements Serializable {
     private String position;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "powersId")
-    private List<Admins> admin = new ArrayList<>();
+    private Set<Admins> admin = new HashSet<>();
 
 }

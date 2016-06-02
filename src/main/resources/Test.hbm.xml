@@ -11,18 +11,18 @@
         <property name="description" column="description" type="java.lang.String"/>
         <property name="publicity" column="publicity" type="java.lang.Boolean"/>
 
-        <many-to-one name="subjectId" class="model.Subjects">
+        <many-to-one name="subjectId" class="model.Subjects" lazy="false">
             <column name="subject_id" not-null="true"></column>
         </many-to-one>
 
-        <set name="questionConnectionses" table="Question_Connections">
+        <set name="questionConnectionses" table="Question_Connections" lazy="false">
             <key>
                 <column name="test_id"></column>
             </key>
             <one-to-many class="model.QuestionConnections"/>
         </set>
 
-        <set name="testAvailabilityes" table="Test_Availability">
+        <set name="testAvailabilityes" table="Test_Availability" lazy="false">
             <key>
                 <column name="test_id"></column>
             </key>

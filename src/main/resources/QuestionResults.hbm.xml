@@ -10,11 +10,11 @@
         <property name="result" column="result" type="java.lang.Integer"/>
 
 
-        <many-to-one name="testSessionId" class="model.TestSession">
+        <many-to-one name="testSessionId" class="model.TestSession" lazy="false">
             <column name="test_session_id" not-null="true"></column>
         </many-to-one>
 
-        <many-to-one name="questionConnectionsId" class="model.QuestionConnections">
+        <many-to-one name="questionConnectionsId" class="model.QuestionConnections" lazy="false">
             <column name="qc_id" not-null="true"></column>
         </many-to-one>
 

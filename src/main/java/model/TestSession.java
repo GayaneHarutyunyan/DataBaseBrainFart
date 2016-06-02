@@ -46,10 +46,11 @@ public class TestSession implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testSessionId")
     private Set<QuestionResults> questionResultses = new HashSet<>();
 
-    public TestSession(Date submitDate, Integer testResult) {
+   /* public TestSession(Date submitDate, Integer testResult) {
         this.submitDate = submitDate;
         this.testResult = testResult;
         log.trace("Created test session: testResult=" + testResult);
 
     }
+    */
 }

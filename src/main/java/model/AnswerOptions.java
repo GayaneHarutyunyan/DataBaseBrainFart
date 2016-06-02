@@ -41,9 +41,10 @@ public class AnswerOptions implements Serializable {
     @NotNull
     @Column(name = "correctness")
     private boolean correctness;
-
+/*
     public AnswerOptions(String content, boolean correctness) {
         this.content = content;
         this.correctness = correctness;
     }
+    */
 }

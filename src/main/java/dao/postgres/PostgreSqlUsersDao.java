@@ -97,6 +97,7 @@ public class PostgreSqlUsersDao implements UsersDao {
             //возвращает список всех юзеров
             userses = session.createCriteria(Users.class).list();
         } finally {
+            //lazy="false" чтобы не вываливалась ошибка что мы закрываем сессию не релдизавав его
             if ((session != null) && (session.isOpen())) session.close();
         }
         return userses;

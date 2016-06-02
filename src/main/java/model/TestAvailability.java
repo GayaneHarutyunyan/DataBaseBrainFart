@@ -41,10 +41,11 @@ public class TestAvailability implements Serializable {
     @NotNull
     @Column(name = "end_date")
     private Date endDate;
-
+/*
     public TestAvailability(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
         log.trace("Timing of the test operation");
     }
+    */
 }

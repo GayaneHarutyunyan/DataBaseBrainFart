@@ -12,11 +12,11 @@
         <property name="phoneNumber" column="phone_number" type="java.lang.String"/>
         <property name="email" column="email" type="java.lang.String"/>
 
-        <set name="testSession" table="Test_Session">
+        <set name="testSession" table="Test_Session" lazy="false">
             <key>
                 <column name="user_id"></column>
             </key>
-            <one-to-many class="model.TestSession"/>
+            <one-to-many class="model.TestSession" />
         </set>
 
 

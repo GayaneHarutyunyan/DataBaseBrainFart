@@ -53,10 +53,12 @@ public class Tests implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testId")
     private Set<TestAvailability> testAvailabilityes = new HashSet<>();
 
+/*
     public Tests(String description, String name, boolean publicity) {
         this.description = description;
         this.name = name;
         this.publicity = publicity;
     }
+    */
 
 }

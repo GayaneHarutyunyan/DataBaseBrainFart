@@ -11,7 +11,7 @@
         <property name="correctness" column="correctness" type="java.lang.Boolean"/>
 
 
-        <many-to-one name="questionsId" class="model.Questions">
+        <many-to-one name="questionsId" class="model.Questions" lazy="false">
             <column name="questions_id" not-null="true"></column>
         </many-to-one>
 

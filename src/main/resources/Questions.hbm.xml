@@ -10,14 +10,14 @@
         <property name="content" column="content" type="java.lang.String"/>
         <property name="value" column="value" type="java.lang.Integer"/>
 
-        <set name="questionConnectionses" table="Question_Connections">
+        <set name="questionConnectionses" table="Question_Connections" lazy="false">
             <key>
                 <column name="question_id"></column>
             </key>
             <one-to-many class="model.QuestionConnections"/>
         </set>
 
-        <set name="answerOptionses" table="Answer_Options">
+        <set name="answerOptionses" table="Answer_Options" lazy="false">
             <key>
                 <column name="questions_id"></column>
             </key>

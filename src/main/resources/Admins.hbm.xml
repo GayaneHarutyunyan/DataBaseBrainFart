@@ -3,18 +3,15 @@
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
-    <class name="model.TestAvailability" table="Test_Availability">
+    <class name="modelAdmin.Admins" table="Admins">
         <id name="id" column="id" type="java.lang.Long">
             <generator class="increment"/>
         </id>
-        <property name="startDate" column="start_date" type="java.util.Date"/>
-        <property name="endDate" column="end_date" type="java.util.Date"/>
+        <property name="email" column="email" type="java.lang.String"/>
+        <property name="password" column="password" type="java.lang.String"/>
 
-
-        <many-to-one name="testId" class="model.Subjects" lazy="false">
-            <column name="test_id" not-null="true"></column>
+        <many-to-one name="powersId" class="modelAdmin.Powers" lazy="false">
+            <column name="powers_id" not-null="true"></column>
         </many-to-one>
-
-
     </class>
 </hibernate-mapping>

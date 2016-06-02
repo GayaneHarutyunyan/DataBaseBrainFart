@@ -33,8 +33,9 @@ public class Subjects implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "subjectId")
     private Set<Tests> testses=new HashSet<>();
-
+/*
     public Subjects(String subject) {
         this.subject = subject;
     }
+    */
 }
