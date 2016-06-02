@@ -1,23 +1,21 @@
 package dao.postgres;
 
-import java.sql.*;
 import java.util.*;
 
-
+import org.apache.log4j.Logger;
 import app.HibernateUtil;
 import exception.*;
 import dao.*;
 import model.*;
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 
 public class PostgreSqlUsersDao implements UsersDao {
     //  private DaoFactory daoFactory = DaoFactory.getInstance();
-    //  private static Logger log = Logger.getLogger(PostgreSqlUsersDao.class.getName());
+    private static Logger log = Logger.getLogger(PostgreSqlUsersDao.class.getName());
 
     @Override
-    public void addUser(Users users) throws DaoRuntimeException{
+    public void addUser(Users users) throws DaoRuntimeException {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -73,6 +71,7 @@ public class PostgreSqlUsersDao implements UsersDao {
     @Override
     public void deleteUser(Users users) throws DaoRuntimeException {
         Session session = null;
+
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             //Мы начинаем транзакцию

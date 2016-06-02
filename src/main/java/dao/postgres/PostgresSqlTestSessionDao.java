@@ -1,21 +1,18 @@
 package dao.postgres;
 
 import app.HibernateUtil;
-import dao.DaoFactory;
 import dao.TestSessionDao;
 import exception.*;
 import model.*;
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import java.sql.*;
 import java.util.*;
 
 public class PostgresSqlTestSessionDao implements TestSessionDao {
 
 
     //private DaoFactory daoFactory = DaoFactory.getInstance();
-   // private static Logger log = Logger.getLogger(PostgresSqlTestSessionDao.class.getName());
+   // private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PostgresSqlTestSessionDao.class.getName());
 
     @Override
     public void addTestSession(TestSession testSession) throws DaoRuntimeException {

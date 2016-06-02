@@ -14,22 +14,22 @@ public class TestUsers {
 
     @Before
     public void setUp() {
-        customer = new Users("FirstName", "SecondName", "Email", "phoneNumber");
+       // customer = new Users("firstName", "secondName", "email", "phoneNumber");
     }
 
     @Test
     public void testGetFirstName() {
-        assertEquals("FirstName", customer.getFirstName());
+        assertEquals("firstName", customer.getFirstName());
     }
 
     @Test
     public void testGetSecondName() {
-        assertEquals("SecondName", customer.getSecondName());
+        assertEquals("secondName", customer.getSecondName());
     }
 
     @Test
     public void testGetEmail() {
-        assertEquals("Email", customer.getEmail());
+        assertEquals("email", customer.getEmail());
     }
 
     @Test

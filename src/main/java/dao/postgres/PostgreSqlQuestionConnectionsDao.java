@@ -4,10 +4,8 @@ import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import java.sql.*;
 import java.util.*;
 
 /**
@@ -15,7 +13,7 @@ import java.util.*;
  */
 public class PostgreSqlQuestionConnectionsDao implements QuestionConnectionsDao {
    // private DaoFactory daoFactory = DaoFactory.getInstance();
-   // private static Logger log = Logger.getLogger(PostgreSqlQuestionConnectionsDao.class.getName());
+   // private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PostgreSqlQuestionConnectionsDao.class.getName());
 
     @Override
     public void addQuestionConnections(QuestionConnections questionConnections) throws DaoRuntimeException {

@@ -6,17 +6,15 @@ import dao.*;
 import exception.*;
 import model.*;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class PostgreSqlSubjectsDao implements SubjectsDao {
   //  private DaoFactory daoFactory = DaoFactory.getInstance();
-   // private static Logger log = Logger.getLogger(PostgreSqlSubjectsDao.class.getName());
+   // private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PostgreSqlSubjectsDao.class.getName());
 
     @Override
     public void addSubjects(Subjects subjects) throws DaoRuntimeException {

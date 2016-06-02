@@ -5,16 +5,14 @@ import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreSqlQuestionDao implements QuestionDao {
   //  private DaoFactory daoFactory = DaoFactory.getInstance();
-  //  private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
+  //  private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PostgreSqlTestsDao.class.getName());
 
     @Override
     public void addQuestions(Questions questions) throws DaoRuntimeException {

@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Main {
 
-    //  private  Logger logger = Logger.getInstance(Main.class);
+    //  private  org.apache.log4j.Logger logger = org.apache.log4j.Logger.getInstance(Main.class);
 
     public static void main(String[] args) {
 

@@ -4,17 +4,15 @@ import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import modelAdmin.*;
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import java.sql.*;
 import java.util.*;
 
 
 public class PosgreSqlAdminDao implements AdminDao {
 
    // private DaoFactory daoFactory = DaoFactory.getInstance();
-   // private static Logger log = Logger.getLogger(PosgreSqlAdminDao.class.getName());
+   // private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PosgreSqlAdminDao.class.getName());
 
     @Override
     public void addAdmins(Admins admins) throws DaoRuntimeException {

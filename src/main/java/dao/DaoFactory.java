@@ -1,15 +1,6 @@
 package dao;
 
 
-import java.io.IOException;
-import java.sql.*;
-import java.util.*;
-
-import dao.postgres.*;
-import exception.*;
-import org.apache.log4j.Logger;
-
-
 public class DaoFactory {
 
 
@@ -20,7 +11,7 @@ public class DaoFactory {
     private String password;
     private String url;
     private String driver;
-    private static Logger log = Logger.getLogger(DaoFactory.class.getName());
+    private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(DaoFactory.class.getName());
 
     private DaoFactory() {
         loadProperties();

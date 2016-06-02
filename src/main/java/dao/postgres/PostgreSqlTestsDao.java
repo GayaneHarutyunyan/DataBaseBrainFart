@@ -1,7 +1,6 @@
 package dao.postgres;
 
 
-import java.sql.*;
 import java.util.*;
 
 
@@ -10,14 +9,13 @@ import dao.*;
 import exception.*;
 import model.*;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 
 public class PostgreSqlTestsDao implements TestsDao {
 
    // private DaoFactory daoFactory = DaoFactory.getInstance();
-   // private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
+   // private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PostgreSqlTestsDao.class.getName());
 
     @Override
     public void addTests(Tests tests) throws DaoRuntimeException {

@@ -5,16 +5,15 @@ import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.apache.log4j.Logger;
 
-import java.sql.*;
 import java.util.*;
 
 
 public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     //private DaoFactory daoFactory = DaoFactory.getInstance();
-   // private static Logger log = Logger.getLogger(PostgreSqlAnswerOptionsDao.class.getName());
+    private static Logger log = Logger.getLogger(PostgreSqlAnswerOptionsDao.class.getName());
 
     @Override
     public void addAnswerOptions(AnswerOptions answerOptions) throws DaoRuntimeException {

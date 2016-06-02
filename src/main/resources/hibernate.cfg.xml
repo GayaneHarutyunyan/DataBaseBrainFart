@@ -42,7 +42,7 @@
                                                   <mapping class="model.AnswerOptions"/>
 
                                                   <mapping class="modelAdmin.Admins"/>
-                                                  <mapping class="modelAdmin.PowersDao"/>
+                                                  <mapping class="modelAdmin.Powers"/>
         -->
 
                           </session-factory>

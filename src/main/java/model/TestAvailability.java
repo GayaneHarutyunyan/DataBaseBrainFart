@@ -1,7 +1,6 @@
 package model;
 
 import lombok.*;
-import lombok.experimental.Accessors;
 import org.apache.log4j.Logger;
 
 import javax.persistence.*;

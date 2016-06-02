@@ -1,7 +1,9 @@
 package dao;
 
+import app.Config;
 import model.*;
 import modelAdmin.*;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -9,7 +11,12 @@ import java.util.*;
  * Created by gaya on 02.06.2016.
  */
 public class ProjectTest {
+
+
     public static void main(String[] args) {
+
+
+
         Factory factory = Factory.getFactory();
         UsersDao usersDao = factory.getUsersDao();
         TestSessionDao testSessionDao = factory.getTestSessionDao();
@@ -21,8 +28,7 @@ public class ProjectTest {
         QuestionConnectionsDao questionConnectionsDao = factory.getQuestionConnectionsDao();
         AnswerOptionsDao answerOptionsDao = factory.getAnswerOptionsDao();
         AdminDao adminDao = factory.getAdminDao();
-
-        /*
+/*
 
         users.setEmail("harutyunyan15@mail.ru");
         users.setPhoneNumber("0635827207");
