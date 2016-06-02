@@ -69,6 +69,8 @@ public class ProjectTest {
         usersDao.updateUser(users);
 */
 
+
+/*
         testListUsers(usersDao);
 
         testListTests(testsDao);
@@ -88,7 +90,7 @@ public class ProjectTest {
         testListAnswerOptions(answerOptionsDao);
 
         testListAdmins(adminDao);
-
+*/
     }
 
     private static void testListAdmins(AdminDao adminDao) {
@@ -165,7 +167,6 @@ public class ProjectTest {
                             "   " + users.getSecondName() +
                             "   " + users.getPhoneNumber() +
                             "   " + users.getEmail());
-
         }
     }
 
@@ -211,7 +212,6 @@ public class ProjectTest {
                             "   " + tests.getDescription() +
                             "   " + tests.getName() +
                             "   " + tests.isPublicity());
-
         }
     }
 
