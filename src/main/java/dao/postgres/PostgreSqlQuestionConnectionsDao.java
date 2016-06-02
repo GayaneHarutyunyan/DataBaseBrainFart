@@ -14,8 +14,8 @@ import java.util.*;
  * не знаю как соединить 3 листа в один
  */
 public class PostgreSqlQuestionConnectionsDao implements QuestionConnectionsDao {
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgreSqlQuestionConnectionsDao.class.getName());
+   // private DaoFactory daoFactory = DaoFactory.getInstance();
+   // private static Logger log = Logger.getLogger(PostgreSqlQuestionConnectionsDao.class.getName());
 
     @Override
     public void addQuestionConnections(QuestionConnections questionConnections) throws DaoRuntimeException {

@@ -13,8 +13,8 @@ import java.util.*;
 
 
 public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgreSqlAnswerOptionsDao.class.getName());
+    //private DaoFactory daoFactory = DaoFactory.getInstance();
+   // private static Logger log = Logger.getLogger(PostgreSqlAnswerOptionsDao.class.getName());
 
     @Override
     public void addAnswerOptions(AnswerOptions answerOptions) throws DaoRuntimeException {

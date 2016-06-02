@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 public class DaoFactory {
 
 
-
+/*
     private static DaoFactory daoFactory;
     private static String type;
     private String user;
@@ -114,6 +114,7 @@ public class DaoFactory {
 
 
     }
+    */
 }
 
 

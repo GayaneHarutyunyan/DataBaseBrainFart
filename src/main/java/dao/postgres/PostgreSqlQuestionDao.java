@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreSqlQuestionDao implements QuestionDao {
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
+  //  private DaoFactory daoFactory = DaoFactory.getInstance();
+  //  private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
 
     @Override
     public void addQuestions(Questions questions) throws DaoRuntimeException {

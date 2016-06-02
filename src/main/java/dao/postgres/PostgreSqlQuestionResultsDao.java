@@ -12,8 +12,8 @@ import java.util.*;
 
 
 public class PostgreSqlQuestionResultsDao implements QuestionResultsDao {
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgreSqlQuestionResultsDao.class.getName());
+    //private DaoFactory daoFactory = DaoFactory.getInstance();
+    //private static Logger log = Logger.getLogger(PostgreSqlQuestionResultsDao.class.getName());
 
     @Override
     public void addQuestionResults(QuestionResults questionResults) throws DaoRuntimeException {
