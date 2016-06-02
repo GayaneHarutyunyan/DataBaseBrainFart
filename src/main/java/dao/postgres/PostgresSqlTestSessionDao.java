@@ -1,10 +1,12 @@
 package dao.postgres;
 
+import app.HibernateUtil;
 import dao.DaoFactory;
 import dao.TestSessionDao;
 import exception.*;
 import model.*;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 import java.sql.*;
 import java.util.*;
@@ -12,11 +14,81 @@ import java.util.*;
 public class PostgresSqlTestSessionDao implements TestSessionDao {
 
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgresSqlTestSessionDao.class.getName());
+    //private DaoFactory daoFactory = DaoFactory.getInstance();
+   // private static Logger log = Logger.getLogger(PostgresSqlTestSessionDao.class.getName());
 
     @Override
-    public List<TestSession> getAll() throws DaoRuntimeException {
+    public void addTestSession(TestSession testSession) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(testSession);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public TestSession readTestSession(long id) throws DaoRuntimeException {
+
+        TestSession result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (TestSession) session.get(TestSession.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public void updateTestSession(TestSession testSession) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(testSession);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void deleteTestSession(TestSession testSession) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(testSession);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public List<TestSession> getTestSession() throws DaoRuntimeException {
+        Session session = null;
+        List<TestSession> testSessions = new ArrayList<>();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            //возвращает список всех юзеров
+            testSessions = session.createCriteria(TestSession.class).list();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return testSessions;
+    }
+
+
+
+    /*
+    @Override
+    public List<TestSession> getAll()  {
 
         List<TestSession> testSession = new ArrayList<>();
 
@@ -61,7 +133,7 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot get all test Session", e);
+            log.warn("Cannot get all test Session", e);
         } finally {
             try {
                 connection.close();
@@ -75,7 +147,7 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
     }
 
     @Override
-    public List<TestSession> getTestSessionByResult(Integer testResult) throws DaoRuntimeException {
+    public List<TestSession> getTestSessionByResult(Integer testResult) {
         List<TestSession> testSessions = new ArrayList<>();
         String sql = "SELECT * FROM public.test_session where test_result=?";
 
@@ -120,7 +192,7 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot get testSession by testResult=" + testResult, e);
+            log.warn("Cannot get testSession by testResult=" + testResult, e);
         } finally {
             try {
                 connection.close();
@@ -134,4 +206,5 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
 
         return testSessions;
     }
+    */
 }

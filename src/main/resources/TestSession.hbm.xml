@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="model.TestSession" table="Test_Session">
+        <id name="id" column="id" type="java.lang.Long">
+            <generator class="increment"/>
+        </id>
+        <property name="submitDate" column="submit_date" type="java.util.Date"/>
+        <property name="testResult" column="test_result" type="java.lang.Integer"/>
+
+
+        <many-to-one name="userId" class="model.Users">
+            <column name="user_id" not-null="true"></column>
+        </many-to-one>
+
+
+        <set name="questionResultses" table="Question_Results">
+            <key>
+                <column name="test_session_id"></column>
+            </key>
+            <one-to-many class="model.QuestionResults"/>
+        </set>
+
+
+    </class>
+</hibernate-mapping>

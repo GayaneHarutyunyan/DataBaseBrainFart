@@ -1,22 +1,94 @@
 package dao.postgres;
 
 
+import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PostgreSqlSubjectsDao implements SubjectsDao {
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgreSqlSubjectsDao.class.getName());
-
+  //  private DaoFactory daoFactory = DaoFactory.getInstance();
+   // private static Logger log = Logger.getLogger(PostgreSqlSubjectsDao.class.getName());
 
     @Override
-    public Subjects create(long id, String subject) throws DaoRuntimeException {
+    public void addSubjects(Subjects subjects) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(subjects);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public Subjects readSubjects(long id) throws DaoRuntimeException {
+        Subjects result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (Subjects) session.get(Subjects.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public void updateSubjects(Subjects subjects) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(session);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void deleteSubjects(Subjects subjects) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(subjects);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public List<Subjects> getSubjects() throws DaoRuntimeException {
+        Session session = null;
+        List<Subjects> subjectses = new ArrayList<>();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            //возвращает список всех юзеров
+            subjectses = session.createCriteria(Subjects.class).list();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return subjectses;
+    }
+
+
+/*
+
+    @Override
+    public Subjects create(long id, String subject) {
 
         log.info("Creating new subject with id=" + id);
         String sql = "insert into public.subjects (subject) values (?)";
@@ -62,7 +134,6 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create Subjects", e);
-            throw new DaoRuntimeException("Cannot create Subjects", e);
         } finally {
             try {
                 connection.close();
@@ -79,7 +150,7 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
     }
 
     @Override
-    public Subjects read(long id) throws DaoRuntimeException {
+    public Subjects read(long id) {
 
         log.trace("Get parameters: id=" + id);
         String sql = "select from public.subjects where id = ?;";
@@ -124,7 +195,6 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create Subjects", e);
-            throw new DaoRuntimeException("Cannot read Subjects", e);
         } finally {
             try {
                 connection.close();
@@ -144,7 +214,7 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
     }
 
     @Override
-    public void delete(long id) throws DaoRuntimeException {
+    public void delete(long id) {
 
         log.trace("Get parameters: id=" + id);
         String sql = "delete from public.subjects where id = ?;";
@@ -171,7 +241,6 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create Subjects", e);
-            throw new DaoRuntimeException("Cannot delete Subjects", e);
         } finally {
             try {
                 connection.close();
@@ -181,4 +250,5 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
             }
         }
     }
+    */
 }

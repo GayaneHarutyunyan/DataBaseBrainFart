@@ -32,7 +32,7 @@ public class Subjects implements Serializable {
     private String subject;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "subjectId")
-    private List<Tests> testses=new ArrayList<>();
+    private Set<Tests> testses=new HashSet<>();
 
     public Subjects(String subject) {
         this.subject = subject;

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="model.QuestionConnections" table="Question_Connections">
+        <id name="id" column="id" type="java.lang.Long">
+            <generator class="increment"/>
+        </id>
+
+
+        <many-to-one name="testsId" class="model.Tests">
+            <column name="test_id" not-null="true"></column>
+        </many-to-one>
+
+        <many-to-one name="questionId" class="model.Questions">
+            <column name="question_id" not-null="true"></column>
+        </many-to-one>
+
+
+        <set name="questionResultses" table="Question_Results">
+            <key>
+                <column name="qc_id"></column>
+            </key>
+            <one-to-many class="model.QuestionResults"/>
+        </set>
+
+
+    </class>
+</hibernate-mapping>

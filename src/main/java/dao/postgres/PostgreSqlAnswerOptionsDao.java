@@ -1,10 +1,12 @@
 package dao.postgres;
 
 
+import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 import java.sql.*;
 import java.util.*;
@@ -14,9 +16,79 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private static Logger log = Logger.getLogger(PostgreSqlAnswerOptionsDao.class.getName());
 
+    @Override
+    public void addAnswerOptions(AnswerOptions answerOptions) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(answerOptions);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
 
     @Override
-    public AnswerOptions create(long id, String content, boolean correctness) throws DaoRuntimeException {
+    public void deleteAnswerOptions(AnswerOptions answerOptions) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(answerOptions);
+            session.getTransaction().commit();
+
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void updateAnswerOptions(AnswerOptions answerOptions) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(answerOptions);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public AnswerOptions readAnswerOptions(long id) throws DaoRuntimeException {
+        AnswerOptions result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (AnswerOptions) session.get(AnswerOptions.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public List<AnswerOptions> getAnswerOptions() throws DaoRuntimeException {
+        Session session = null;
+        List<AnswerOptions> answerOptionses = new ArrayList<>();
+        try {
+
+            session = HibernateUtil.getSessionFactory().openSession();
+            //возвращает список всех юзеров
+            answerOptionses = session.createCriteria(AnswerOptions.class).list();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return answerOptionses;
+    }
+
+
+/*
+
+    @Override
+    public AnswerOptions create(long id, String content, boolean correctness) {
         String sql = "INSERT INTO public.answer_options (content,correctness) VALUES (?,?)";
 
 
@@ -59,7 +131,6 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create answerOptions", e);
-            throw new DaoRuntimeException("Cannot create answerOptions", e);
         } finally {
             try {
                 connection.close();
@@ -74,7 +145,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     }
 
     @Override
-    public AnswerOptions read(long id) throws DaoRuntimeException {
+    public AnswerOptions read(long id) {
 
         log.trace("Get parameters: id=" + id);
         String sql = "select from public.answer_options where id = ?;";
@@ -118,7 +189,6 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create AnswerOptions", e);
-            throw new DaoRuntimeException("Cannot read AnswerOptions", e);
         } finally {
             try {
                 connection.close();
@@ -139,7 +209,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     }
 
     @Override
-    public void delete(long id) throws DaoRuntimeException {
+    public void delete(long id) {
         log.trace("Get parameters: id=" + id);
         String sql = "delete from public.answer_options where id = ?;";
 
@@ -166,7 +236,6 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create AnswerOptions", e);
-            throw new DaoRuntimeException("Cannot delete AnswerOptions", e);
         } finally {
             try {
                 connection.close();
@@ -179,7 +248,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
     }
 
     @Override
-    public List<AnswerOptions> getAll() throws DaoRuntimeException {
+    public List<AnswerOptions> getAll() {
 
         List<AnswerOptions> answerOptionses = new ArrayList<>();
 
@@ -225,9 +294,9 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot get all answerOptionses", e);
-        } finally {
-            try {
+            log.warn("Cannot get all answerOptionses", e);
+            } finally {
+                try {
                 connection.close();
                 log.trace("Connection closed");
             } catch (SQLException e) {
@@ -237,6 +306,7 @@ public class PostgreSqlAnswerOptionsDao implements AnswerOptionsDao {
         log.trace("Returning answerOptionses");
         return answerOptionses;
     }
+    */
 
 
 }

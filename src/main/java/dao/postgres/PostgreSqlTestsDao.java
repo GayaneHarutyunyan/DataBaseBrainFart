@@ -5,21 +5,90 @@ import java.sql.*;
 import java.util.*;
 
 
+import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 
 public class PostgreSqlTestsDao implements TestsDao {
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-
-    private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
+   // private DaoFactory daoFactory = DaoFactory.getInstance();
+   // private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
 
     @Override
-    public Tests create(Subjects subjectId, String description, String name, boolean publicity) throws DaoRuntimeException {
+    public void addTests(Tests tests) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(tests);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public Tests readTests(long id) throws DaoRuntimeException {
+        Tests result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (Tests) session.get(Tests.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public void updateTests(Tests tests) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(tests);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void deleteTests(Tests tests) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(tests);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public List<Tests> getTests() throws DaoRuntimeException {
+        Session session = null;
+        List<Tests>  testses = new ArrayList<>();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            //возвращает список всех юзеров
+            testses = session.createCriteria(Tests.class).list();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return testses;
+    }
+
+
+/*
+    @Override
+    public Tests create(Subjects subjectId, String description, String name, boolean publicity) {
         log.trace("Get parameters: name=" + name + ", subjectId=" + subjectId + ", description=" + description + ", publicity" + publicity);
         String sql = "insert into public.tests (subjectId, description, name,publicity) values (?, ?,?,?)";
 
@@ -67,7 +136,6 @@ public class PostgreSqlTestsDao implements TestsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create tests", e);
-            throw new DaoRuntimeException("Cannot create tests", e);
         } finally {
             try {
                 connection.close();
@@ -81,7 +149,7 @@ public class PostgreSqlTestsDao implements TestsDao {
     }
 
     @Override
-    public Tests read(long id) throws DaoRuntimeException {
+    public Tests read(long id) {
         log.trace("Get parameters: id=" + id);
         String sql = "select from public.tests where id = ?;";
 
@@ -102,12 +170,8 @@ public class PostgreSqlTestsDao implements TestsDao {
                     resultSet = preparedStatement.executeQuery();
                     resultSet.next();
                     log.trace("Create tests to return");
-
                     tests = new Tests(resultSet.getString("description"), resultSet.getString("name"), resultSet.getBoolean("publicity"));
-
-
                     tests.setId(resultSet.getInt("id"));
-
 
                 } finally {
                     try {
@@ -127,7 +191,6 @@ public class PostgreSqlTestsDao implements TestsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create tests", e);
-            throw new DaoRuntimeException("Cannot read tests", e);
         } finally {
             try {
                 connection.close();
@@ -147,7 +210,7 @@ public class PostgreSqlTestsDao implements TestsDao {
     }
 
     @Override
-    public void delete(long id) throws DaoRuntimeException {
+    public void delete(long id) {
         log.trace("Get parameters: id=" + id);
         String sql = "delete from public.tests where id = ?;";
 
@@ -172,7 +235,6 @@ public class PostgreSqlTestsDao implements TestsDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create tests", e);
-            throw new DaoRuntimeException("Cannot delete tests", e);
         } finally {
             try {
                 connection.close();
@@ -184,7 +246,7 @@ public class PostgreSqlTestsDao implements TestsDao {
     }
 
     @Override
-    public List<Tests> getAll() throws DaoRuntimeException {
+    public List<Tests> getAll(){
         List<Tests> testses = new ArrayList<>();
         String sql = "SELECT *FROM public.tests";
 
@@ -226,7 +288,7 @@ public class PostgreSqlTestsDao implements TestsDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot get all testses", e);
+            log.warn("Cannot get all testses", e);
         } finally {
             try {
                 connection.close();
@@ -240,5 +302,6 @@ public class PostgreSqlTestsDao implements TestsDao {
 
         return testses;
     }
+    */
 
 }

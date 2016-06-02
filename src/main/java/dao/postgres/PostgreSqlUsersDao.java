@@ -1,20 +1,112 @@
 package dao.postgres;
 
 import java.sql.*;
+import java.util.*;
 
 
+import app.HibernateUtil;
 import exception.*;
 import dao.*;
 import model.*;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 
 public class PostgreSqlUsersDao implements UsersDao {
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgreSqlUsersDao.class.getName());
+    //  private DaoFactory daoFactory = DaoFactory.getInstance();
+    //  private static Logger log = Logger.getLogger(PostgreSqlUsersDao.class.getName());
 
     @Override
-    public Users create(long id, String firstName, String secondName, String email, String phoneNumber) throws DaoRuntimeException {
+    public void addUser(Users users) throws DaoRuntimeException{
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            //Мы начинаем транзакцию
+            session.beginTransaction();
+            //сохраняем юзера
+            session.save(users);
+            //возвращаем транзакцию и закончили
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public Users readUser(long id) throws DaoRuntimeException {
+        Users result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (Users) session.get(Users.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public void updateUser(Users users) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            //Мы начинаем транзакцию
+            session.beginTransaction();
+            //обновление юзера
+            session.update(users);
+/*
+            Users temp = new Users();
+            temp.setId(users.getId());
+            temp.setFirstName(users.getFirstName());
+            temp.setSecondName(users.getSecondName());
+            temp.setEmail(users.getEmail());
+            temp.setPhoneNumber(users.getPhoneNumber());
+           session.update(temp);
+           */
+            //возвращаем транзакцию и закончили
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void deleteUser(Users users) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            //Мы начинаем транзакцию
+            session.beginTransaction();
+            //сохраняем юзера
+            session.delete(users);
+            //возвращаем транзакцию и закончили
+            session.getTransaction().commit();
+
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public List<Users> getUser() throws DaoRuntimeException {
+        Session session = null;
+        List<Users> userses = new ArrayList<>();
+        try {
+
+            session = HibernateUtil.getSessionFactory().openSession();
+            //возвращает список всех юзеров
+            userses = session.createCriteria(Users.class).list();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return userses;
+    }
+
+
+
+/*
+    @Override
+    public Users create(long id, String firstName, String secondName, String email, String phoneNumber) {
         //создаем нового юзера
         log.info("Creating new user with id=" + id);
         String sql = "insert into customers (id, email, firstName, secondName, phoneNumber) values (?,?,?,?,?);";
@@ -62,7 +154,6 @@ public class PostgreSqlUsersDao implements UsersDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create user", e);
-            throw new DaoRuntimeException("Cannot create user", e);
         } finally {
             try {
                 connection.close();
@@ -76,7 +167,7 @@ public class PostgreSqlUsersDao implements UsersDao {
     }
 
     @Override
-    public Users read(long id) throws DaoRuntimeException {
+    public Users read(long id)  {
         log.trace("Looking for customer with id=" + id);
         String sql = "select * from public.users where id = ?;";
 
@@ -119,7 +210,7 @@ public class PostgreSqlUsersDao implements UsersDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot read user", e);
+            log.warn("Cannot read user", e);
         } finally {
             try {
                 connection.close();
@@ -139,9 +230,8 @@ public class PostgreSqlUsersDao implements UsersDao {
     }
 
     @Override
-    public Users update(long id, String email, String firstName, String secondName, String phoneNumber) throws DaoRuntimeException {
+    public Users update(long id, String email, String firstName, String secondName, String phoneNumber) {
         String sql = "update public.users set firstName = ?, secondName = ?, email = ?, phoneNumber = ?, where id = ?";
-
         Users users = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -166,8 +256,6 @@ public class PostgreSqlUsersDao implements UsersDao {
                     log.trace("Create customer to return");
                     users = new Users(resultSet.getString("email"), resultSet.getString("firstName"),
                             resultSet.getString("secondName"), resultSet.getString("phoneNumber"));
-
-
                 } finally {
                     try {
                         resultSet.close();
@@ -185,7 +273,7 @@ public class PostgreSqlUsersDao implements UsersDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot update user ", e);
+            log.warn("Cannot update user ", e);
         } finally {
             try {
                 connection.close();
@@ -197,9 +285,6 @@ public class PostgreSqlUsersDao implements UsersDao {
         log.trace("Users " + id + " has updated info");
         log.trace("Returning updated user");
         return users;
-
     }
-
-
-
+*/
 }

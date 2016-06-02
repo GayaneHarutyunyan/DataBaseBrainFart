@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="model.Users" table="users">
+        <id name="id" column="id" type="java.lang.Long">
+            <generator class="increment"/>
+        </id>
+        <property name="firstName" column="first_name" type="java.lang.String"/>
+        <property name="secondName" column="second_name" type="java.lang.String"/>
+        <property name="phoneNumber" column="phone_number" type="java.lang.String"/>
+        <property name="email" column="email" type="java.lang.String"/>
+
+        <set name="testSession" table="Test_Session">
+            <key>
+                <column name="user_id"></column>
+            </key>
+            <one-to-many class="model.TestSession"/>
+        </set>
+
+
+    </class>
+</hibernate-mapping>

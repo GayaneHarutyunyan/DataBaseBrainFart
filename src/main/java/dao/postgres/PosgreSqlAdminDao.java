@@ -1,9 +1,11 @@
 package dao.postgres;
 
+import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import modelAdmin.*;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 import java.sql.*;
 import java.util.*;
@@ -15,7 +17,74 @@ public class PosgreSqlAdminDao implements AdminDao {
     private static Logger log = Logger.getLogger(PosgreSqlAdminDao.class.getName());
 
     @Override
-    public List<Admins> getAll() throws DaoRuntimeException {
+    public void addAdmins(Admins admins) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(admins);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void deleteAdmins(Admins admins) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(admins);
+            session.getTransaction().commit();
+
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void updateAdmins(Admins admins) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(admins);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public Admins readAdmins(long id) throws DaoRuntimeException {
+        Admins result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (Admins) session.get(Admins.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;    }
+
+    @Override
+    public List<Admins> getAdmins() throws DaoRuntimeException {
+        Session session = null;
+        List<Admins>  adminses = new ArrayList<>();
+        try {
+
+            session = HibernateUtil.getSessionFactory().openSession();
+            //возвращает список всех юзеров
+            adminses = session.createCriteria(Admins.class).list();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return adminses;
+    }
+/*
+    @Override
+    public List<Admins> getAll() {
         List<Admins> adminses = new ArrayList<>();
         String sql = "SELECT * FROM public.admins";
 
@@ -57,7 +126,7 @@ public class PosgreSqlAdminDao implements AdminDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot get all adminses", e);
+            log.warn ("Cannot get all adminses", e);
         } finally {
             try {
                 connection.close();
@@ -69,4 +138,5 @@ public class PosgreSqlAdminDao implements AdminDao {
         log.trace("Returning adminses");
         return adminses;
     }
+    */
 }

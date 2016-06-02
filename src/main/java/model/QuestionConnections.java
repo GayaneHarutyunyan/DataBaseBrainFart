@@ -38,5 +38,5 @@ public class QuestionConnections implements Serializable {
     private Questions questionId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionConnectionsId")
-    private List<QuestionResults> questionResultses=new ArrayList<>();
+    private Set<QuestionResults> questionResultses=new HashSet<>();
 }

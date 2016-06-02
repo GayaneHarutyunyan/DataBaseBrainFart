@@ -1,9 +1,11 @@
 package dao.postgres;
 
+import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 import java.sql.*;
 import java.util.*;
@@ -16,7 +18,75 @@ public class PostgreSqlQuestionConnectionsDao implements QuestionConnectionsDao 
     private static Logger log = Logger.getLogger(PostgreSqlQuestionConnectionsDao.class.getName());
 
     @Override
-    public List<QuestionConnections> getAll() throws DaoRuntimeException {
+    public void addQuestionConnections(QuestionConnections questionConnections) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(questionConnections);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void deleteQuestionConnections(QuestionConnections questionConnections) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(questionConnections);
+            session.getTransaction().commit();
+
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void updateQuestionConnections(QuestionConnections questionConnections) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(questionConnections);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public QuestionConnections readQuestionConnections(long id) throws DaoRuntimeException {
+        QuestionConnections result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (QuestionConnections) session.get(QuestionConnections.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public List<QuestionConnections> getQuestionConnections() throws DaoRuntimeException {
+        Session session = null;
+        List<QuestionConnections> questionConnectionses = new ArrayList<>();
+        try {
+
+            session = HibernateUtil.getSessionFactory().openSession();
+            //возвращает список всех юзеров
+            questionConnectionses = session.createCriteria(QuestionConnections.class).list();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return questionConnectionses;
+    }
+/*
+    @Override
+    public List<QuestionConnections> getAll() {
         List<QuestionConnections> questionConnectionses = new ArrayList<>();
         String sql = "SELECT * FROM public.question_results";
 
@@ -58,7 +128,7 @@ public class PostgreSqlQuestionConnectionsDao implements QuestionConnectionsDao 
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot get all questionConnections", e);
+            log.warn("Cannot get all questionConnections", e);
         } finally {
             try {
                 connection.close();
@@ -72,4 +142,5 @@ public class PostgreSqlQuestionConnectionsDao implements QuestionConnectionsDao 
 
         return questionConnectionses;
     }
+    */
 }

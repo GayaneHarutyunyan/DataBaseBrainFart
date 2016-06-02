@@ -1,19 +1,92 @@
 package dao.postgres;
 
 
+import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostgreSqlQuestionDao implements QuestionDao {
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private static Logger log = Logger.getLogger(PostgreSqlTestsDao.class.getName());
 
     @Override
-    public Questions create(long id, String content, Integer value) throws DaoRuntimeException {
+    public void addQuestions(Questions questions) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(questions);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void deleteQuestions(Questions questions) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(questions);
+            session.getTransaction().commit();
+
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void updateQuestions(Questions questions) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(questions);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public Questions readQuestions(long id) throws DaoRuntimeException {
+        Questions result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (Questions) session.get(Questions.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public List<Questions> getQuestions() throws DaoRuntimeException {
+        Session session = null;
+        List<Questions>  questionses = new ArrayList<>();
+        try {
+
+            session = HibernateUtil.getSessionFactory().openSession();
+            //возвращает список всех юзеров
+            questionses = session.createCriteria(Questions.class).list();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return questionses;
+    }
+
+/*
+    @Override
+    public Questions create(long id, String content, Integer value) {
         log.info("Creating new question with id=" + id);
         String sql = "insert into public.questions (content,value) VALUES (?,?)";
 
@@ -58,7 +131,6 @@ public class PostgreSqlQuestionDao implements QuestionDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create questions", e);
-            throw new DaoRuntimeException("Cannot create questions", e);
         } finally {
             try {
                 connection.close();
@@ -72,7 +144,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
     }
 
     @Override
-    public Questions read(long id) throws DaoRuntimeException {
+    public Questions read(long id) {
 
         log.trace("Get parameters: id=" + id);
         String sql = "select from public.questions where id = ?;";
@@ -116,7 +188,6 @@ public class PostgreSqlQuestionDao implements QuestionDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create questions", e);
-            throw new DaoRuntimeException("Cannot read questions", e);
         } finally {
             try {
                 connection.close();
@@ -136,7 +207,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
     }
 
     @Override
-    public void delete(long id) throws DaoRuntimeException {
+    public void delete(long id) {
 
         log.trace("Get parameters: id=" + id);
         String sql = "delete from public.questions where id = ?;";
@@ -164,7 +235,6 @@ public class PostgreSqlQuestionDao implements QuestionDao {
             }
         } catch (SQLException e) {
             log.warn("Cannot create questions", e);
-            throw new DaoRuntimeException("Cannot delete questions", e);
         } finally {
             try {
                 connection.close();
@@ -174,6 +244,7 @@ public class PostgreSqlQuestionDao implements QuestionDao {
             }
         }
     }
+    */
 }
 
 

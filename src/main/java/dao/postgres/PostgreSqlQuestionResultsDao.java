@@ -1,9 +1,11 @@
 package dao.postgres;
 
+import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 import java.sql.*;
 import java.util.*;
@@ -14,7 +16,75 @@ public class PostgreSqlQuestionResultsDao implements QuestionResultsDao {
     private static Logger log = Logger.getLogger(PostgreSqlQuestionResultsDao.class.getName());
 
     @Override
-    public List<QuestionResults> getAll() throws DaoRuntimeException {
+    public void addQuestionResults(QuestionResults questionResults) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(questionResults);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void deleteQuestionResults(QuestionResults questionResults) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(questionResults);
+            session.getTransaction().commit();
+
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void updateQuestionResults(QuestionResults questionResults) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(questionResults);
+            session.getTransaction().commit();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public QuestionResults readQuestionResults(long id) throws DaoRuntimeException {
+        QuestionResults result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (QuestionResults) session.get(QuestionResults.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public List<QuestionResults> getQuestionResults() throws DaoRuntimeException {
+        Session session = null;
+        List<QuestionResults> questionResultses = new ArrayList<>();
+        try {
+
+            session = HibernateUtil.getSessionFactory().openSession();
+            //возвращает список всех юзеров
+            questionResultses = session.createCriteria(QuestionResults.class).list();
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return questionResultses;
+    }
+/*
+    @Override
+    public List<QuestionResults> getAll() {
         List<QuestionResults> questionResultses = new ArrayList<>();
         String sql = "SELECT * FROM public.question_results";
 
@@ -56,7 +126,7 @@ public class PostgreSqlQuestionResultsDao implements QuestionResultsDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot get all questionResultses", e);
+            log.warn("Cannot get all questionResultses", e);
         } finally {
             try {
                 connection.close();
@@ -68,4 +138,5 @@ public class PostgreSqlQuestionResultsDao implements QuestionResultsDao {
         log.trace("Returning questionResultses");
         return questionResultses;
     }
+    */
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="model.Subjects" table="Subjects">
+        <id name="id" column="id" type="java.lang.Long">
+            <generator class="increment"/>
+        </id>
+        <property name="subject" column="subject" type="java.lang.String"/>
+
+
+
+        <set name="testses" table="Tests">
+            <key>
+                <column name="subject_id"></column>
+            </key>
+            <one-to-many class="model.Tests"/>
+        </set>
+
+
+
+
+    </class>
+</hibernate-mapping>

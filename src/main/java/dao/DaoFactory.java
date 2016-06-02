@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 
 public class DaoFactory {
 
+
+
     private static DaoFactory daoFactory;
     private static String type;
     private String user;
@@ -54,9 +56,10 @@ public class DaoFactory {
     }
 
 
-    public Connection getConnection() throws DaoRuntimeException {
+
+    public  Connection getConnection() throws DaoRuntimeException {
         log.trace("Driver manager get connection");
-        try {
+                try {
             return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             throw new DaoRuntimeException("No connection to DB", e);
@@ -102,13 +105,16 @@ public class DaoFactory {
 
     }
 
-    public AdminDao getAdminDao() {
-        return new PosgreSqlAdminDao();
+    public AdminDao getAdminDao(String type) {
+        if (type.equalsIgnoreCase("postgres")) {
+            return new PosgreSqlAdminDao();
+        }else {
+            return new PosgreSqlAdminDao();
+        }
+
 
     }
-
 }
-
 
 
 

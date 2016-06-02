@@ -15,26 +15,34 @@
         <!-- Print executed SQL to stdout -->
         <property name="show_sql">true</property>
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create</property>
-        <!-- <property name="hbm2ddl.auto">insert</property>-->
+        <!--  <property name="hbm2ddl.auto">create</property>
+          <property name="hbm2ddl.auto">insert</property>-->
 
+        <mapping resource="Users.hbm.xml"/>
+        <mapping resource="TestSession.hbm.xml"/>
+        <mapping resource="TestAvailability.hbm.xml"/>
+        <mapping resource="Test.hbm.xml"/>
+        <mapping resource="Subjects.hbm.xml"/>
+        <mapping resource="Questions.hbm.xml"/>
+        <mapping resource="QuestionResults.hbm.xml"/>
+        <mapping resource="QuestionConnections.hbm.xml"/>
+        <mapping resource="AnswerOptions.hbm.xml"/>
 
+        <!--
+                         <mapping class="model.Users"/>
+                         <mapping class="model.TestSession"/>
+                         <mapping class="model.Tests"/>
+                         <mapping class="model.TestAvailability"/>
+                         <mapping class="model.Subjects"/>
+                         <mapping class="model.Questions"/>
+                         <mapping class="model.QuestionResults"/>
+                         <mapping class="model.QuestionConnections"/>
+                         <mapping class="model.AnswerOptions"/>
 
+                         <mapping class="modelAdmin.Admins"/>
+                         <mapping class="modelAdmin.Powers"/>
 
-         <mapping class="model.Users"/>
-         <mapping class="model.TestSession"/>
-         <mapping class="model.Tests"/>
-         <mapping class="model.TestAvailability"/>
-         <mapping class="model.Subjects"/>
-         <mapping class="model.Questions"/>
-         <mapping class="model.QuestionResults"/>
-         <mapping class="model.QuestionConnections"/>
-         <mapping class="model.AnswerOptions"/>
+        -->
+    </session-factory>
 
-         <mapping class="modelAdmin.Admins"/>
-         <mapping class="modelAdmin.Powers"/>
-
-
-     </session-factory>
-
- </hibernate-configuration>
+</hibernate-configuration>

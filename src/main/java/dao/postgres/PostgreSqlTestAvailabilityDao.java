@@ -1,9 +1,11 @@
 package dao.postgres;
 
+import app.HibernateUtil;
 import dao.*;
 import exception.*;
 import model.*;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 import java.sql.*;
 import java.util.*;
@@ -11,11 +13,78 @@ import java.util.*;
 
 public class PostgreSqlTestAvailabilityDao implements TestAvailabilityDao {
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Logger log = Logger.getLogger(PostgreSqlTestAvailabilityDao.class.getName());
+   // private DaoFactory daoFactory = DaoFactory.getInstance();
+  //  private static Logger log = Logger.getLogger(PostgreSqlTestAvailabilityDao.class.getName());
 
     @Override
-    public List<TestAvailability> getAll() throws DaoRuntimeException {
+    public void addTestAvailability(TestAvailability testAvailability) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(testAvailability);
+            session.getTransaction().commit();
+        } finally {
+            if ((session == null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public TestAvailability readTestAvailability(long id) throws DaoRuntimeException {
+        TestAvailability result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (TestAvailability) session.get(TestAvailability.class, id);
+        } finally {
+            if ((session == null) && (session.isOpen())) session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public void updateTestAvailability(TestAvailability testAvailability) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(testAvailability);
+            session.getTransaction().commit();
+        } finally {
+            if ((session == null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public void deleteTestAvailability(TestAvailability testAvailability) throws DaoRuntimeException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(testAvailability);
+            session.getTransaction().commit();
+        } finally {
+            if ((session == null) && (session.isOpen())) session.close();
+        }
+    }
+
+    @Override
+    public List<TestAvailability> getTestAvailability() throws DaoRuntimeException {
+        Session session = null;
+        List<TestAvailability> testAvailabilities = new ArrayList<>();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            testAvailabilities = session.createCriteria(TestAvailability.class).list();
+        } finally {
+            if ((session == null) && (session.isOpen())) session.close();
+        }
+        return testAvailabilities;
+    }
+
+
+/*
+    @Override
+    public List<TestAvailability> getAll() {
         List<TestAvailability> testAvailabilityes = new ArrayList<>();
         String sql = "SELECT * FROM public.test_availability";
 
@@ -38,9 +107,7 @@ public class PostgreSqlTestAvailabilityDao implements TestAvailabilityDao {
                         testAvailability.setId(resultSet.getLong("id"));
                         testAvailabilityes.add(testAvailability);
                         log.trace("TestAvailability " + testAvailability.getId() + " added to set");
-
                     }
-
                 } finally {
                     try {
                         resultSet.close();
@@ -58,7 +125,7 @@ public class PostgreSqlTestAvailabilityDao implements TestAvailabilityDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException("Cannot get all testAvailability", e);
+            log.warn("Cannot get all testAvailability", e);
         } finally {
             try {
                 connection.close();
@@ -71,4 +138,5 @@ public class PostgreSqlTestAvailabilityDao implements TestAvailabilityDao {
         log.trace("Returning testAvailabilityes");
         return testAvailabilityes;
     }
+    */
 }
