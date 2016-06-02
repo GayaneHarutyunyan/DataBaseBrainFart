@@ -9,17 +9,12 @@
         </id>
         <property name="subject" column="subject" type="java.lang.String"/>
 
-
-
         <set name="testses" table="Tests">
             <key>
                 <column name="subject_id"></column>
             </key>
             <one-to-many class="model.Tests"/>
         </set>
-
-
-
 
     </class>
 </hibernate-mapping>

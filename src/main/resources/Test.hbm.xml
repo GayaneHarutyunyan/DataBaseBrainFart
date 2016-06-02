@@ -11,11 +11,9 @@
         <property name="description" column="description" type="java.lang.String"/>
         <property name="publicity" column="publicity" type="java.lang.Boolean"/>
 
-
         <many-to-one name="subjectId" class="model.Subjects">
             <column name="subject_id" not-null="true"></column>
         </many-to-one>
-
 
         <set name="questionConnectionses" table="Question_Connections">
             <key>

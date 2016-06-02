@@ -10,8 +10,6 @@
         <property name="content" column="content" type="java.lang.String"/>
         <property name="value" column="value" type="java.lang.Integer"/>
 
-
-
         <set name="questionConnectionses" table="Question_Connections">
             <key>
                 <column name="question_id"></column>
