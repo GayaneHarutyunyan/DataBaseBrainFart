@@ -1,29 +1,27 @@
-import app.Config;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
 
 
 /**
  * Created by gaya on 03.06.2016.
  */
 public class ConfigTest {
+    private static final Logger log = Logger.getLogger(ConfigTest.class);
 
-    private static String LOG_PROPERTIES_FILE = "./conf/log4j.properties";
-    private static Logger logger = Logger.getLogger(ConfigTest.class.getName());
+    public static void main(String[] args) {
+        ConfigTest test=new ConfigTest();
+        test.doOrder();
+    }
 
-    public static void main(String[] args) throws IOException {
+    public void doOrder(){
+        // какае-то логика
+        System.out.println("Юзер заполнил анкету !");
+        log.info("Это информационное сообщение!");
+        addToCart();
+    }
 
-        Config config = new Config(LOG_PROPERTIES_FILE);
-        config.inIt();
-
-        //В стандартной лог конфигурации вы это сообщение не увидите
-        logger.fatal("some minor, debug message ");
-
-        logger.info(" Program run ... ");
-
-        logger.info(" mess", new Exception());
-
-
+    private void addToCart() {
+        // добавление товара в корзину
+        System.out.println("Юзер добавлен в базу ");
+        log.error("Это сообщение ошибки");
     }
 }
