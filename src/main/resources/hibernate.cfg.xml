@@ -29,7 +29,6 @@
                   <mapping resource="QuestionConnections.hbm.xml"/>
                   <mapping resource="AnswerOptions.hbm.xml"/>
 
-        <!--
 
                                                   <mapping class="model.Users"/>
                                                   <mapping class="model.TestSession"/>
@@ -43,7 +42,7 @@
 
                                                   <mapping class="modelAdmin.Admins"/>
                                                   <mapping class="modelAdmin.Powers"/>
-        -->
+
 
                           </session-factory>
 
