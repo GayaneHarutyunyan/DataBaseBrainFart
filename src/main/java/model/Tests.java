@@ -31,14 +31,16 @@ public class Tests implements Serializable {
     @Column(name = "name")
     private String name;
 
-   @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "subject_id", nullable = false)
-    @NotNull
 
     /*
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="subject_id", insertable=false, updatable=false)
     */
+
+   @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "subject_id", nullable = false)
+    @NotNull
+
     private Subjects subjectId;
 
     @Lob
@@ -62,10 +64,6 @@ public class Tests implements Serializable {
     @JoinColumn(name = "admin_id", nullable = false)
     @NotNull
 
-    /*
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="admin_id", insertable=false, updatable=false)
-    */
     private Admins adminId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testsId")

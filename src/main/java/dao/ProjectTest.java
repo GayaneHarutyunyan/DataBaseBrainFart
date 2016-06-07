@@ -29,9 +29,8 @@ public class ProjectTest {
         PowersDao powersDao = factory.getPowersDao();
 
 
-        /**
-         * работает правильно
-         */
+        //*** работает правильно
+
         Users users = new Users();
 
         users.setFirstName("Гаяне");
@@ -56,9 +55,8 @@ public class ProjectTest {
 
         //***************************************************************************
 
-/**
- * работает правильно
- */
+//*** работает правильно
+
         Subjects subjects = new Subjects();
 
         subjects.setSubject("Java");
@@ -71,7 +69,7 @@ public class ProjectTest {
         subjectsDao.addSubjects(subjects);
 
 
-        //***************************************************************************
+//***************************************************************************
         Powers powers = new Powers();
         powers.setPosition("admin");
         powersDao.addPowers(powers);
@@ -84,7 +82,8 @@ public class ProjectTest {
         Admins admins = new Admins();
         admins.setEmail("karate@mail.ru");
         admins.setPassword("jakAQkmxzQmczsajak");
-        admins.setPowersId(powers.);
+        //не понятно как записать туда powers_id
+        admins.setPowersId(powersDao.readPowers(1));
         adminDao.addAdmins(admins);
 
 
@@ -97,23 +96,23 @@ public class ProjectTest {
         Tests tests = new Tests();
 
         tests.setName("Beginner Java");
-        tests.setSubjectId(subjects);
+        tests.setSubjectId(subjectsDao.readSubjects(1));
         tests.setDescription("Сейчас такой конструктор возвращает " +
                 "список QuestionConnections - использовать который крайне неудобно,");
         tests.setPublicity(true);
         tests.setImg("C:\\Users\\gaya\\IdeaProjects\\DataBaseBrainFart\\src\\main\\resources\\pictures\\diagram1.png");
-        tests.setAdminId(admins);
+        tests.setAdminId(adminDao.readAdmins(1));
         testsDao.addTests(tests);
 
 
         tests.setName("Beginner Java");
-        tests.setSubjectId(subjects);
+        tests.setSubjectId(subjectsDao.readSubjects(2));
         tests.setDescription(" собрать полноценный тест с текущей" +
                 " реализацией получиться только с кучей дополнительных действий" +
                 " и подключений к базе.");
         tests.setPublicity(true);
         tests.setImg("C:\\Users\\gaya\\IdeaProjects\\DataBaseBrainFart\\src\\main\\resources\\pictures\\diagram2.jpg");
-        tests.setAdminId(admins);
+        tests.setAdminId(adminDao.readAdmins(2));
         testsDao.addTests(tests);
 
 /*
