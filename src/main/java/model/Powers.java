@@ -1,8 +1,9 @@
-package modelAdmin;
+package model;
 
 
 import lombok.*;
 import lombok.experimental.*;
+import model.Admins;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;

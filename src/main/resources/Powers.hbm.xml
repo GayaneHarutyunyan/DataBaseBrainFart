@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
-    <class name="modelAdmin.Powers" table="Powers">
+    <class name="model.Powers" table="Powers">
         <id name="id" column="id" type="java.lang.Long">
             <generator class="increment"/>
         </id>
@@ -12,9 +12,9 @@
 
         <set name="admin" table="Admins" lazy="false">
             <key>
-                <column name="powers_id"></column>
+                <column name="powers_id"/>
             </key>
-            <one-to-many class="modelAdmin.Admins"/>
+            <one-to-many class="model.Admins"/>
         </set>
 
 

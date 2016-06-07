@@ -11,11 +11,11 @@
 
 
         <many-to-one name="testSessionId" class="model.TestSession" lazy="false">
-            <column name="test_session_id" not-null="true"></column>
+            <column name="test_session_id" not-null="true"/>
         </many-to-one>
 
         <many-to-one name="questionConnectionsId" class="model.QuestionConnections" lazy="false">
-            <column name="qc_id" not-null="true"></column>
+            <column name="qc_id" not-null="true"/>
         </many-to-one>
 
 

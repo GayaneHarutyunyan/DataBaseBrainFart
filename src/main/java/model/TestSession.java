@@ -23,7 +23,6 @@ import java.util.*;
 public class TestSession implements Serializable {
     private static Logger log = Logger.getLogger(TestSession.class.getName());
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -34,22 +33,19 @@ public class TestSession implements Serializable {
     @NotNull
     private Users userId;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "test_id", nullable = false)
     @NotNull
-    @Column(name = "submit_date")
-    private Date submitDate;
+    private Tests testsId;
 
     @NotNull
     @Column(name = "test_result")
     private Integer testResult;
 
+    @NotNull
+    @Column(name = "submit_date")
+    private Date submitDate;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testSessionId")
     private Set<QuestionResults> questionResultses = new HashSet<>();
-
-   /* public TestSession(Date submitDate, Integer testResult) {
-        this.submitDate = submitDate;
-        this.testResult = testResult;
-        log.trace("Created test session: testResult=" + testResult);
-
-    }
-    */
 }

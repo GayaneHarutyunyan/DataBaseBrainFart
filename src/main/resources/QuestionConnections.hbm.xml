@@ -10,17 +10,17 @@
 
 
         <many-to-one name="testsId" class="model.Tests" lazy="false">
-            <column name="test_id" not-null="true"></column>
+            <column name="test_id" not-null="true"/>
         </many-to-one>
 
         <many-to-one name="questionId" class="model.Questions" lazy="false">
-            <column name="question_id" not-null="true"></column>
+            <column name="question_id" not-null="true"/>
         </many-to-one>
 
 
         <set name="questionResultses" table="Question_Results" lazy="false">
             <key>
-                <column name="qc_id"></column>
+                <column name="qc_id"/>
             </key>
             <one-to-many class="model.QuestionResults"/>
         </set>

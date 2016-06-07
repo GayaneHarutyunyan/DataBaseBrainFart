@@ -18,12 +18,4 @@ public interface TestSessionDao {
 
     List<TestSession> getTestSession() throws DaoRuntimeException;
 
-
-
-
-/*
-    List<TestSession> getAll() throws DaoRuntimeException;
-
-    List<TestSession> getTestSessionByResult(Integer testResult) throws DaoRuntimeException;
-*/
 }

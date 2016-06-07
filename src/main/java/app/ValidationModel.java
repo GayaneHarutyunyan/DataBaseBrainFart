@@ -1,7 +1,6 @@
 package app;
 
 import model.*;
-import modelAdmin.*;
 
 import javax.validation.*;
 import java.util.*;

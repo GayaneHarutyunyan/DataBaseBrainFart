@@ -12,14 +12,14 @@
 
         <set name="questionConnectionses" table="Question_Connections" lazy="false">
             <key>
-                <column name="question_id"></column>
+                <column name="question_id"/>
             </key>
             <one-to-many class="model.QuestionConnections"/>
         </set>
 
         <set name="answerOptionses" table="Answer_Options" lazy="false">
             <key>
-                <column name="questions_id"></column>
+                <column name="questions_id"/>
             </key>
             <one-to-many class="model.AnswerOptions"/>
         </set>

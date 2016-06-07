@@ -12,13 +12,13 @@
 
 
         <many-to-one name="userId" class="model.Users" lazy="false">
-            <column name="user_id" not-null="true"></column>
+            <column name="user_id" not-null="true"/>
         </many-to-one>
 
 
         <set name="questionResultses" table="Question_Results" lazy="false">
             <key>
-                <column name="test_session_id"></column>
+                <column name="test_session_id"/>
             </key>
             <one-to-many class="model.QuestionResults"/>
         </set>

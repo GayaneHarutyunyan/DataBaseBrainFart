@@ -18,5 +18,4 @@ public interface QuestionConnectionsDao {
 
     List<QuestionConnections> getQuestionConnections() throws DaoRuntimeException;
 
-    //   List<QuestionConnections> getAll() throws DaoRuntimeException;
 }

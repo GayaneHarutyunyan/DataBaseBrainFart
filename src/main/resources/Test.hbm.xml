@@ -12,19 +12,19 @@
         <property name="publicity" column="publicity" type="java.lang.Boolean"/>
 
         <many-to-one name="subjectId" class="model.Subjects" lazy="false">
-            <column name="subject_id" not-null="true"></column>
+            <column name="subject_id" not-null="true"/>
         </many-to-one>
 
         <set name="questionConnectionses" table="Question_Connections" lazy="false">
             <key>
-                <column name="test_id"></column>
+                <column name="test_id"/>
             </key>
             <one-to-many class="model.QuestionConnections"/>
         </set>
 
         <set name="testAvailabilityes" table="Test_Availability" lazy="false">
             <key>
-                <column name="test_id"></column>
+                <column name="test_id"/>
             </key>
             <one-to-many class="model.TestAvailability"/>
         </set>

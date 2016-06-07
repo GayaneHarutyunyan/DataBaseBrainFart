@@ -41,10 +41,5 @@ public class QuestionResults implements Serializable {
     @Column(name = "result")
     private Integer result;
 
-    /*public QuestionResults(Integer result) {
-        this.result = result;
-    }
-    */
-
 }
 

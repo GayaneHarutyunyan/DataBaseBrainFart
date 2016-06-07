@@ -47,18 +47,22 @@ public class Tests implements Serializable {
     @Column(name = "publicity")
     private boolean publicity;
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "img")
+    private String img;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "admin_id", nullable = false)
+    @NotNull
+    private Admins adminId;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testsId")
     private Set<QuestionConnections> questionConnectionses = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "testId")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "testsId")
     private Set<TestAvailability> testAvailabilityes = new HashSet<>();
 
-/*
-    public Tests(String description, String name, boolean publicity) {
-        this.description = description;
-        this.name = name;
-        this.publicity = publicity;
-    }
-    */
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "testsId")
+    private Set<TestSession> testSessions = new HashSet<>();
 }

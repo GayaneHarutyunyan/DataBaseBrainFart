@@ -18,6 +18,4 @@ public interface QuestionResultsDao {
 
     List<QuestionResults> getQuestionResults() throws DaoRuntimeException;
 
-
-    // List<QuestionResults> getAll() throws DaoRuntimeException;
 }

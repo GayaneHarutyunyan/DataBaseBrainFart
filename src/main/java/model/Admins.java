@@ -1,4 +1,4 @@
-package modelAdmin;
+package model;
 
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.*;
 
 
 @Entity
@@ -31,21 +32,17 @@ public class Admins implements Serializable {
     @Column(name = "email")
     private String email;
 
+    @Lob
     @Basic
     @NotNull
     @Column(name = "password")
     private String password;
-
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "powers_id", nullable = false)
     @NotNull
     private Powers powersId;
 
-    public Admins(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "adminId")
+    private Set<Tests> testses = new HashSet<>();
 }

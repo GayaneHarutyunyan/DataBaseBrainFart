@@ -56,11 +56,4 @@ public class Users implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "userId")
     private Set<TestSession> testSession = new HashSet<>();
 
-    public Users(String firstName, String secondName, String email, String phoneNumber) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
-
 }

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreSqlQuestionDao implements QuestionDao {
-  //  private DaoFactory daoFactory = DaoFactory.getInstance();
   //  private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PostgreSqlTestsDao.class.getName());
 
     @Override

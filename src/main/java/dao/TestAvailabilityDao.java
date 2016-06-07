@@ -17,5 +17,4 @@ public interface TestAvailabilityDao {
 
     List<TestAvailability> getTestAvailability() throws DaoRuntimeException;
 
-    //List<TestAvailability> getAll() throws DaoRuntimeException;
 }

@@ -14,7 +14,7 @@
 
         <set name="testSession" table="Test_Session" lazy="false">
             <key>
-                <column name="user_id"></column>
+                <column name="user_id"/>
             </key>
             <one-to-many class="model.TestSession" />
         </set>

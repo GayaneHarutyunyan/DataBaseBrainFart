@@ -38,15 +38,15 @@ public class Questions implements Serializable {
     @Column(name = "value")
     private Integer value;
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "img")
+    private String img;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionId")
     private Set<QuestionConnections> questionConnectionses=new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionsId")
     private Set<AnswerOptions> answerOptionses=new HashSet<>();
-/*
-    public Questions(String content, Integer value) {
-        this.content = content;
-        this.value = value;
-    }
-    */
+
 }

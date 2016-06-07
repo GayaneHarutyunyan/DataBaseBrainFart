@@ -1,7 +1,7 @@
 package dao;
 
 import exception.*;
-import modelAdmin.*;
+import model.Powers;
 
 import java.util.*;
 

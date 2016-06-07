@@ -16,14 +16,4 @@ public interface AnswerOptionsDao {
     void deleteAnswerOptions(AnswerOptions answerOptions) throws DaoRuntimeException;
 
     List<AnswerOptions> getAnswerOptions() throws DaoRuntimeException;
-
-    /*
-    AnswerOptions create(long id, String content, boolean correctness) throws DaoRuntimeException;
-
-    AnswerOptions read(long id) throws DaoRuntimeException;
-
-    void delete(long id) throws DaoRuntimeException;
-
-    List<AnswerOptions> getAll() throws DaoRuntimeException;
-    */
-}
+    }

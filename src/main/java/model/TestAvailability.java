@@ -31,7 +31,7 @@ public class TestAvailability implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "test_id", nullable = false)
     @NotNull
-    private Tests testId;
+    private Tests testsId;
 
     @NotNull
     @Column(name = "start_date")
@@ -40,11 +40,4 @@ public class TestAvailability implements Serializable {
     @NotNull
     @Column(name = "end_date")
     private Date endDate;
-/*
-    public TestAvailability(Date startDate, Date endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        log.trace("Timing of the test operation");
-    }
-    */
 }

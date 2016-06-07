@@ -12,7 +12,7 @@
 
 
         <many-to-one name="testId" class="model.Subjects" lazy="false">
-            <column name="test_id" not-null="true"></column>
+            <column name="test_id" not-null="true"/>
         </many-to-one>
 
 

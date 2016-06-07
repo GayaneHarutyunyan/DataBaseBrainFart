@@ -18,11 +18,4 @@ public interface QuestionDao {
 
     List<Questions> getQuestions() throws DaoRuntimeException;
 
-    /*
-    Questions create(long id, String content, Integer value) throws DaoRuntimeException;
-
-    Questions read(long id) throws DaoRuntimeException;
-
-    void delete(long id) throws DaoRuntimeException;
-    */
 }
