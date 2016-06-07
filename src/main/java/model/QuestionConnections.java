@@ -26,15 +26,21 @@ public class QuestionConnections implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "test_id", nullable = false)
+/*
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "test_id", referencedColumnName = "id", insertable = false, updatable = false)
     @NotNull
+    */
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="test_id", insertable=false, updatable=false)
     private Tests testsId;
-
+/*
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "question_id", nullable = false)
     @NotNull
+    */
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="question_id", insertable=false, updatable=false)
     private Questions questionId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionConnectionsId")

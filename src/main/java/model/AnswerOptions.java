@@ -25,10 +25,13 @@ public class AnswerOptions implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
-
+/*
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "questions_id", nullable = false)
     @NotNull
+*/
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="questions_id", insertable=false, updatable=false)
     private Questions questionsId;
 
     @Lob

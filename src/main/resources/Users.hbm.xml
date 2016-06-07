@@ -19,9 +19,9 @@
 
         <property name="email" column="email" type="java.lang.String"/>
 
-        <list name="testSession" table="Test_Session" lazy="false">
-            <key column="user_id" not-null="true"/>
-            <list-index column="testSessions_id"/>
+        <list name="testSession" table="Test_Session" inverse="false"  lazy="false" >
+            <key column="user_id"/>
+            <list-index column="id"/>
             <one-to-many class="model.TestSession"/>
         </list>
 

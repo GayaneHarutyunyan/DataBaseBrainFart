@@ -28,9 +28,13 @@ public class TestAvailability implements Serializable {
     @Column(name = "id")
     private long id;
 
+/*
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "test_id", nullable = false)
     @NotNull
+*/
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="test_id", insertable=false, updatable=false)
     private Tests testsId;
 
     @NotNull

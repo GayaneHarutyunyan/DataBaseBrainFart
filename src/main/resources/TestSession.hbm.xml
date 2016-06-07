@@ -24,8 +24,8 @@
         </many-to-one>
 
         <list name="questionResultses" table="Question_Results" lazy="false">
-            <key column="test_session_id" not-null="true"/>
-            <list-index column="questionResults_id"/>
+            <key column="test_session_id"/>
+            <list-index column="id"/>
             <one-to-many class="model.QuestionResults"/>
         </list>
 

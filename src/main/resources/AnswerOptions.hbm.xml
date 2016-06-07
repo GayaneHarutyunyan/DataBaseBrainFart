@@ -17,8 +17,8 @@
 
         <property name="img" column="img" type="java.lang.String"/>
 
-        <many-to-one name="questionsId" class="model.Questions" lazy="false">
-            <column name="questions_id" not-null="true"/>
+        <many-to-one name="questionsId" class="model.Questions" insert="false" update="false">
+            <column name="questions_id" />
         </many-to-one>
 
     </class>

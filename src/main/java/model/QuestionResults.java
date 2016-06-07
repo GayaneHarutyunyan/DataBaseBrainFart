@@ -26,14 +26,21 @@ public class QuestionResults implements Serializable {
     @Column(name = "id")
     private long id;
 
+/*
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "test_session_id", nullable = false)
     @NotNull
-    private TestSession testSessionId;
+*/
 
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="test_session_id", insertable=false, updatable=false)
+    private TestSession testSessionId;
+/*
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "qc_id", nullable = false)
-    @NotNull
+    */
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="qc_id", insertable=false, updatable=false)
     private QuestionConnections questionConnectionsId;
 
     @Basic

@@ -13,8 +13,8 @@
 
         <property name="name" column="name" type="java.lang.String"/>
 
-        <many-to-one name="subjectId" class="model.Subjects" lazy="false">
-            <column name="subject_id" not-null="true"/>
+        <many-to-one name="subjectId" class="model.Subjects" insert="false" update="false">
+            <column name="subject_id" />
         </many-to-one>
 
         <property name="description" column="description" type="java.lang.String"/>
@@ -23,25 +23,25 @@
 
         <property name="img" column="img" type="java.lang.String"/>
 
-        <many-to-one name="adminId" class="model.Admins" lazy="false">
-            <column name="admin_id" not-null="true"/>
+        <many-to-one name="adminId" class="model.Admins" insert="false" update="false">
+            <column name="admin_id"/>
         </many-to-one>
 
         <list name="questionConnectionses" table="Question_Connections" lazy="false">
-            <key column="test_id" not-null="true"/>
-            <list-index column="questionConnections_id"/>
+            <key column="test_id" />
+            <list-index column="id"/>
             <one-to-many class="model.QuestionConnections"/>
         </list>
 
         <list name="testAvailabilityes" table="Test_Availability" lazy="false">
-            <key column="test_id" not-null="true"/>
-            <list-index column="testAvailability_id"/>
+            <key column="test_id" />
+            <list-index column="id"/>
             <one-to-many class="model.TestAvailability"/>
         </list>
 
         <list name="testSessions" table="Test_Session" lazy="false">
-            <key column="test_id" not-null="true"/>
-            <list-index column="testSession_id"/>
+            <key column="test_id"/>
+            <list-index column="id"/>
             <one-to-many class="model.TestSession"/>
         </list>
 

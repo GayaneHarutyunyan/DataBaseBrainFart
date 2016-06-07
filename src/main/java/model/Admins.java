@@ -37,10 +37,13 @@ public class Admins implements Serializable {
     @NotNull
     @Column(name = "password")
     private String password;
-
+/*
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "powers_id", nullable = false)
     @NotNull
+*/
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="powers_id", insertable=false, updatable=false)
     private Powers powersId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "adminId")

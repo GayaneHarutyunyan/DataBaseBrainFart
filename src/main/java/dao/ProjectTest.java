@@ -29,6 +29,9 @@ public class ProjectTest {
         PowersDao powersDao = factory.getPowersDao();
 
 
+        /**
+         * работает правильно
+         */
         Users users = new Users();
 
         users.setFirstName("Гаяне");
@@ -37,20 +40,25 @@ public class ProjectTest {
         users.setPhoneNumber("0635827207");
         usersDao.addUser(users);
 
-        users.setFirstName("Дима");
-        users.setSecondName("Говоров");
+
         users.setEmail("govorov@mail.ru");
+        users.setFirstName("Дима");
         users.setPhoneNumber("0636927001");
+        users.setSecondName("Говоров");
         usersDao.addUser(users);
 
-        users.setFirstName("Marat");
-        users.setSecondName("Karapetyan");
         users.setEmail("bargharut@mail.ru");
+        users.setFirstName("Marat");
         users.setPhoneNumber("0635027211");
+        users.setSecondName("Karapetyan");
         usersDao.addUser(users);
 
-//***************************************************************************
 
+        //***************************************************************************
+
+/**
+ * работает правильно
+ */
         Subjects subjects = new Subjects();
 
         subjects.setSubject("Java");
@@ -63,21 +71,28 @@ public class ProjectTest {
         subjectsDao.addSubjects(subjects);
 
 
-//***************************************************************************
+        //***************************************************************************
         Powers powers = new Powers();
         powers.setPosition("admin");
         powersDao.addPowers(powers);
 
 //***************************************************************************
 
+        /**
+         * работает но не коректно не читает powers_id
+         */
         Admins admins = new Admins();
         admins.setEmail("karate@mail.ru");
         admins.setPassword("jakAQkmxzQmczsajak");
-        admins.setPowersId(powers);
+        admins.setPowersId(powers.);
         adminDao.addAdmins(admins);
 
 
 //***************************************************************************
+
+        /**
+         * работает но не коректно не читает admin_id subject_id
+         */
 
         Tests tests = new Tests();
 
@@ -101,8 +116,10 @@ public class ProjectTest {
         tests.setAdminId(admins);
         testsDao.addTests(tests);
 
-
+/*
 //***************************************************************************
+
+        //*** не работает
 
         TestSession testSession = new TestSession();
         testSession.setUserId(users);
@@ -113,6 +130,7 @@ public class ProjectTest {
         testSessionDao.addTestSession(testSession);
 
 //***************************************************************************
+//** * не работает
 
         TestAvailability testAvailability = new TestAvailability();
         testAvailability.setTestsId(tests);
@@ -121,6 +139,7 @@ public class ProjectTest {
         testAvailabilityDao.addTestAvailability(testAvailability);
 
 //***************************************************************************
+//** * не работает
 
         Questions questions = new Questions();
         questions.setImg("./pictures/diagram2.jpg");
@@ -129,6 +148,7 @@ public class ProjectTest {
         questionDao.addQuestions(questions);
 
 //***************************************************************************
+//** * не работает
 
         AnswerOptions answerOptions = new AnswerOptions();
         answerOptions.setQuestionsId(questions);
@@ -139,6 +159,7 @@ public class ProjectTest {
 
 //***************************************************************************
 
+//** * не работает
 
         QuestionConnections questionConnections = new QuestionConnections();
         questionConnections.setTestsId(tests);
@@ -146,6 +167,8 @@ public class ProjectTest {
         questionConnectionsDao.addQuestionConnections(questionConnections);
 
 //***************************************************************************
+        //**         * не работает
+
         QuestionResults questionResults = new QuestionResults();
         questionResults.setTestSessionId(testSession);
         questionResults.setQuestionConnectionsId(questionConnections);
@@ -154,8 +177,9 @@ public class ProjectTest {
 
 //***************************************************************************
 
-
+*/
     }
+}
 
 /*
        users=  usersDao.readUser(5);
@@ -348,4 +372,3 @@ public class ProjectTest {
         }
     }
 */
-}

@@ -31,11 +31,21 @@ public class TestSession implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
+
+/*
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="user_id", insertable=false, updatable=false)
+    */
     private Users userId;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "test_id", nullable = false)
     @NotNull
+
+    /*
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="test_id", insertable=false, updatable=false)
+    */
     private Tests testsId;
 
     @NotNull

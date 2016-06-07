@@ -14,8 +14,8 @@
         <property name="subject" column="subject" type="java.lang.String"/>
 
         <list name="testses" table="Tests" lazy="false">
-            <key column="subject_id" not-null="true"/>
-            <list-index column="tests_id"/>
+            <key column="subject_id" />
+            <list-index column="id"/>
             <one-to-many class="model.Tests"/>
         </list>
 
