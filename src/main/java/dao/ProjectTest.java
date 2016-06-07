@@ -29,6 +29,27 @@ public class ProjectTest {
         PowersDao powersDao = factory.getPowersDao();
 
 
+
+        Powers powers = new Powers();
+        powers.setPosition("admin");
+        powersDao.addPowers(powers);
+
+//***************************************************************************
+
+        /**
+         * работает но не коректно не читает powers_id
+         */
+        Admins admins = new Admins();
+        admins.setEmail("karate@mail.ru");
+        admins.setPassword("jakAQkmxzQmczsajak");
+        //не понятно как записать туда powers_id
+        admins.setPowersId(powersDao.readPowers(1));
+        adminDao.addAdmins(admins);
+
+
+//***************************************************************************
+
+        /*
         //*** работает правильно
 
         Users users = new Users();
@@ -70,28 +91,10 @@ public class ProjectTest {
 
 
 //***************************************************************************
-        Powers powers = new Powers();
-        powers.setPosition("admin");
-        powersDao.addPowers(powers);
-
-//***************************************************************************
-
-        /**
-         * работает но не коректно не читает powers_id
-         */
-        Admins admins = new Admins();
-        admins.setEmail("karate@mail.ru");
-        admins.setPassword("jakAQkmxzQmczsajak");
-        //не понятно как записать туда powers_id
-        admins.setPowersId(powersDao.readPowers(1));
-        adminDao.addAdmins(admins);
 
 
-//***************************************************************************
+        //*** работает но не коректно не читает admin_id subject_id
 
-        /**
-         * работает но не коректно не читает admin_id subject_id
-         */
 
         Tests tests = new Tests();
 
