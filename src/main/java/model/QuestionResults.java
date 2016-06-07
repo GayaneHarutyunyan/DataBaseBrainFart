@@ -40,6 +40,5 @@ public class QuestionResults implements Serializable {
     @NotNull
     @Column(name = "result")
     private Integer result;
-
 }
 

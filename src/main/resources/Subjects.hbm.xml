@@ -2,19 +2,22 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
 <hibernate-mapping>
+
     <class name="model.Subjects" table="Subjects">
+
         <id name="id" column="id" type="java.lang.Long">
             <generator class="increment"/>
         </id>
+
         <property name="subject" column="subject" type="java.lang.String"/>
 
-        <set name="testses" table="Tests" lazy="false">
-            <key>
-                <column name="subject_id"/>
-            </key>
+        <list name="testses" table="Tests" lazy="false">
+            <key column="subject_id" not-null="true"/>
+            <list-index column="tests_id"/>
             <one-to-many class="model.Tests"/>
-        </set>
+        </list>
 
     </class>
 </hibernate-mapping>

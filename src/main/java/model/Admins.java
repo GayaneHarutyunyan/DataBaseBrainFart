@@ -44,5 +44,5 @@ public class Admins implements Serializable {
     private Powers powersId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "adminId")
-    private Set<Tests> testses = new HashSet<>();
+    private List<Tests> testses = new ArrayList<>();
 }

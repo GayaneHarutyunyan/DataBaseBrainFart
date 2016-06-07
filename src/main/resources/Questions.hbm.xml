@@ -2,27 +2,32 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
 <hibernate-mapping>
+
     <class name="model.Questions" table="Questions">
+
         <id name="id" column="id" type="java.lang.Long">
             <generator class="increment"/>
         </id>
+
         <property name="content" column="content" type="java.lang.String"/>
+
         <property name="value" column="value" type="java.lang.Integer"/>
 
-        <set name="questionConnectionses" table="Question_Connections" lazy="false">
-            <key>
-                <column name="question_id"/>
-            </key>
-            <one-to-many class="model.QuestionConnections"/>
-        </set>
+        <property name="img" column="img" type="java.lang.String"/>
 
-        <set name="answerOptionses" table="Answer_Options" lazy="false">
-            <key>
-                <column name="questions_id"/>
-            </key>
+        <list name="questionConnectionses" table="Question_Connections" lazy="false">
+            <key column="question_id" not-null="true"/>
+            <list-index column="questionConnections_id"/>
+            <one-to-many class="model.QuestionConnections"/>
+        </list>
+
+        <list name="answerOptionses" table="Answer_Options" lazy="false">
+            <key column="questions_id" not-null="true"/>
+            <list-index column="answerOptions_id"/>
             <one-to-many class="model.AnswerOptions"/>
-        </set>
+        </list>
 
     </class>
 </hibernate-mapping>

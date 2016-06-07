@@ -2,13 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
 <hibernate-mapping>
+
     <class name="model.QuestionResults" table="Question_Results">
+
         <id name="id" column="id" type="java.lang.Long">
             <generator class="increment"/>
         </id>
-        <property name="result" column="result" type="java.lang.Integer"/>
 
+        <property name="result" column="result" type="java.lang.Integer"/>
 
         <many-to-one name="testSessionId" class="model.TestSession" lazy="false">
             <column name="test_session_id" not-null="true"/>
@@ -17,7 +20,6 @@
         <many-to-one name="questionConnectionsId" class="model.QuestionConnections" lazy="false">
             <column name="qc_id" not-null="true"/>
         </many-to-one>
-
 
     </class>
 </hibernate-mapping>

@@ -2,12 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
 <hibernate-mapping>
+
     <class name="model.QuestionConnections" table="Question_Connections">
+
         <id name="id" column="id" type="java.lang.Long">
             <generator class="increment"/>
         </id>
-
 
         <many-to-one name="testsId" class="model.Tests" lazy="false">
             <column name="test_id" not-null="true"/>
@@ -17,14 +19,11 @@
             <column name="question_id" not-null="true"/>
         </many-to-one>
 
-
-        <set name="questionResultses" table="Question_Results" lazy="false">
-            <key>
-                <column name="qc_id"/>
-            </key>
+        <list  name="questionResultses" table="Question_Results" lazy="false">
+            <key column="qc_id" not-null="true"/>
+            <list-index column="questionResults_id"/>
             <one-to-many class="model.QuestionResults"/>
-        </set>
-
+        </list>
 
     </class>
 </hibernate-mapping>

@@ -58,11 +58,11 @@ public class Tests implements Serializable {
     private Admins adminId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testsId")
-    private Set<QuestionConnections> questionConnectionses = new HashSet<>();
+    private List<QuestionConnections> questionConnectionses = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testsId")
-    private Set<TestAvailability> testAvailabilityes = new HashSet<>();
+    private List<TestAvailability> testAvailabilityes = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testsId")
-    private Set<TestSession> testSessions = new HashSet<>();
+    private List<TestSession> testSessions = new ArrayList<>();
 }

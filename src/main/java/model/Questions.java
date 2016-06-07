@@ -44,9 +44,9 @@ public class Questions implements Serializable {
     private String img;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionId")
-    private Set<QuestionConnections> questionConnectionses=new HashSet<>();
+    private List<QuestionConnections> questionConnectionses=new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionsId")
-    private Set<AnswerOptions> answerOptionses=new HashSet<>();
+    private List<AnswerOptions> answerOptionses=new ArrayList<>();
 
 }

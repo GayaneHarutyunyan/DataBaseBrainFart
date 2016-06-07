@@ -54,6 +54,6 @@ public class Users implements Serializable {
     private String phoneNumber;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "userId")
-    private Set<TestSession> testSession = new HashSet<>();
+    private List<TestSession> testSession = new ArrayList<>();
 
 }

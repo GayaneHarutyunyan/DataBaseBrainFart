@@ -47,5 +47,5 @@ public class TestSession implements Serializable {
     private Date submitDate;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testSessionId")
-    private Set<QuestionResults> questionResultses = new HashSet<>();
+    private List<QuestionResults> questionResultses = new ArrayList<>();
 }

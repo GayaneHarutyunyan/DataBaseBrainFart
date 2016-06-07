@@ -2,41 +2,28 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
 <hibernate-mapping>
+
     <class name="model.Admins" table="Admins">
+
         <id name="id" column="id" type="java.lang.Long">
             <generator class="increment"/>
         </id>
 
         <property name="email" column="email" type="java.lang.String"/>
+
         <property name="password" column="password" type="java.lang.String"/>
 
         <many-to-one name="powersId" class="model.Powers" lazy="false">
             <column name="powers_id" not-null="true"/>
         </many-to-one>
 
-
-        <set name="admin" table="Tests" lazy="false">
-            <key>
-                <column name="admin_id"/>
-            </key>
-            <one-to-many class="model.Admins"/>
-        </set>
-
-
-        <list name="" table="" lazy="">
-            <key>
-                <column name=""/>
-            </key>
-            <one-to-many class=""/>
+        <list name="testses" table="Tests" lazy="false">
+            <key column="admin_id" not-null="true"/>
+            <list-index column="tests_id"/>
+            <one-to-many class="model.Tests"/>
         </list>
-        <list name="" table="" lazy="false">
-            <key>
-                <column name="admin_id"/>
-            </key>
-            <one-to-many class="model.Admins"/>
-        </list>
-
 
     </class>
 </hibernate-mapping>
