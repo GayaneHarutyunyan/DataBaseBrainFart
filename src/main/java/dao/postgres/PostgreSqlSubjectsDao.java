@@ -29,19 +29,6 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
     }
 
     @Override
-    public Subjects readSubjects(long id) throws DaoRuntimeException {
-        Subjects result = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            result = (Subjects) session.get(Subjects.class, id);
-        } finally {
-            if ((session != null) && (session.isOpen())) session.close();
-        }
-        return result;
-    }
-
-    @Override
     public void updateSubjects(Subjects subjects) throws DaoRuntimeException {
         Session session = null;
         try {
@@ -65,6 +52,19 @@ public class PostgreSqlSubjectsDao implements SubjectsDao {
         } finally {
             if ((session != null) && (session.isOpen())) session.close();
         }
+    }
+
+    @Override
+    public Subjects readSubjects(long id) throws DaoRuntimeException {
+        Subjects result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (Subjects) session.get(Subjects.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
     }
 
     @Override

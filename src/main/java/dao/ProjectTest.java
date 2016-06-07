@@ -1,8 +1,10 @@
 package dao;
 
 //import app.Config;
+
 import model.*;
 
+import java.sql.*;
 import java.util.*;
 
 /**
@@ -12,8 +14,6 @@ public class ProjectTest {
 
 
     public static void main(String[] args) {
-
-
 
         Factory factory = Factory.getFactory();
         UsersDao usersDao = factory.getUsersDao();
@@ -26,40 +26,138 @@ public class ProjectTest {
         QuestionConnectionsDao questionConnectionsDao = factory.getQuestionConnectionsDao();
         AnswerOptionsDao answerOptionsDao = factory.getAnswerOptionsDao();
         AdminDao adminDao = factory.getAdminDao();
+        PowersDao powersDao = factory.getPowersDao();
 
 
+        Users users = new Users();
 
-        List<Users> userses = usersDao.getUser();
+        users.setFirstName("Гаяне");
+        users.setSecondName("Арутюнян");
+        users.setEmail("harutyunyan15@mail.ru");
+        users.setPhoneNumber("0635827207");
+        usersDao.addUser(users);
 
-        for (Users users : userses) {
-            System.out.println(
-                    "   " + users.getId() +
-                            "   " + users.getFirstName() +
-                            "   " + users.getSecondName() );
+        users.setFirstName("Дима");
+        users.setSecondName("Говоров");
+        users.setEmail("govorov@mail.ru");
+        users.setPhoneNumber("0636927001");
+        usersDao.addUser(users);
 
-        }}
+        users.setFirstName("Marat");
+        users.setSecondName("Karapetyan");
+        users.setEmail("bargharut@mail.ru");
+        users.setPhoneNumber("0635027211");
+        usersDao.addUser(users);
+
+//***************************************************************************
+
+        Subjects subjects = new Subjects();
+
+        subjects.setSubject("Java");
+        subjectsDao.addSubjects(subjects);
+
+        subjects.setSubject("HTML");
+        subjectsDao.addSubjects(subjects);
+
+        subjects.setSubject("CSS");
+        subjectsDao.addSubjects(subjects);
+
+
+//***************************************************************************
+        Powers powers = new Powers();
+        powers.setPosition("admin");
+        powersDao.addPowers(powers);
+
+//***************************************************************************
+
+        Admins admins = new Admins();
+        admins.setEmail("karate@mail.ru");
+        admins.setPassword("jakAQkmxzQmczsajak");
+        admins.setPowersId(powers);
+        adminDao.addAdmins(admins);
+
+
+//***************************************************************************
+
+        Tests tests = new Tests();
+
+        tests.setName("Beginner Java");
+        tests.setSubjectId(subjects);
+        tests.setDescription("Сейчас такой конструктор возвращает " +
+                "список QuestionConnections - использовать который крайне неудобно,");
+        tests.setPublicity(true);
+        tests.setImg("C:\\Users\\gaya\\IdeaProjects\\DataBaseBrainFart\\src\\main\\resources\\pictures\\diagram1.png");
+        tests.setAdminId(admins);
+        testsDao.addTests(tests);
+
+
+        tests.setName("Beginner Java");
+        tests.setSubjectId(subjects);
+        tests.setDescription(" собрать полноценный тест с текущей" +
+                " реализацией получиться только с кучей дополнительных действий" +
+                " и подключений к базе.");
+        tests.setPublicity(true);
+        tests.setImg("C:\\Users\\gaya\\IdeaProjects\\DataBaseBrainFart\\src\\main\\resources\\pictures\\diagram2.jpg");
+        tests.setAdminId(admins);
+        testsDao.addTests(tests);
+
+
+//***************************************************************************
+
+        TestSession testSession = new TestSession();
+        testSession.setUserId(users);
+        testSession.setTestsId(tests);
+        testSession.setTestResult(85);
+        testSession.setSubmitDate(testSession.getSubmitDate());
+
+        testSessionDao.addTestSession(testSession);
+
+//***************************************************************************
+
+        TestAvailability testAvailability = new TestAvailability();
+        testAvailability.setTestsId(tests);
+        testAvailability.setEndDate(java.sql.Date.valueOf("2016,15,5"));
+        testAvailability.setStartDate(java.sql.Date.valueOf("2016,15,5"));
+        testAvailabilityDao.addTestAvailability(testAvailability);
+
+//***************************************************************************
+
+        Questions questions = new Questions();
+        questions.setImg("./pictures/diagram2.jpg");
+        questions.setContent("biviviviiviviiviviviiviiviviivjdscksn adasaa akhskah skahskahs khakuhsalhsakh");
+        questions.setValue(5);
+        questionDao.addQuestions(questions);
+
+//***************************************************************************
+
+        AnswerOptions answerOptions = new AnswerOptions();
+        answerOptions.setQuestionsId(questions);
+        answerOptions.setContent("a");
+        answerOptions.setCorrectness(true);
+        answerOptions.setImg("./pictures/diagram2.jpg");
+        answerOptionsDao.addAnswerOptions(answerOptions);
+
+//***************************************************************************
+
+
+        QuestionConnections questionConnections = new QuestionConnections();
+        questionConnections.setTestsId(tests);
+        questionConnections.setQuestionId(questions);
+        questionConnectionsDao.addQuestionConnections(questionConnections);
+
+//***************************************************************************
+        QuestionResults questionResults = new QuestionResults();
+        questionResults.setTestSessionId(testSession);
+        questionResults.setQuestionConnectionsId(questionConnections);
+        questionResults.setResult(80);
+        questionResultsDao.addQuestionResults(questionResults);
+
+//***************************************************************************
+
+
+    }
 
 /*
-
-        users.setEmail("harutyunyan15@mail.ru");
-        users.setPhoneNumber("0635827207");
-        users.setSecondName("Bukashka ");
-        users.setFirstName("Buka");
-        usersDao.addUser(users);
-
-        users.setEmail("harutyunyan15@mail.ru");
-        users.setPhoneNumber("0635827207");
-        users.setSecondName("Gnatovsky");
-        users.setFirstName("Andrey");
-        usersDao.addUser(users);
-
-        users.setEmail("harutyunyan15@mail.ru");
-        users.setPhoneNumber("0635827207");
-        users.setSecondName("Karapetyan");
-        users.setFirstName("Marat");
-        usersDao.addUser(users);
-
-
        users=  usersDao.readUser(5);
         System.out.println(
                 users.getId() + " "
@@ -249,5 +347,5 @@ public class ProjectTest {
                             "   " + questionResults.getResult());
         }
     }
-*/}
-
+*/
+}

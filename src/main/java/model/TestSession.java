@@ -48,4 +48,6 @@ public class TestSession implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "testSessionId")
     private List<QuestionResults> questionResultses = new ArrayList<>();
+
+
 }

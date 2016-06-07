@@ -30,19 +30,6 @@ public class PostgreSqlUsersDao implements UsersDao {
     }
 
     @Override
-    public Users readUser(long id) throws DaoRuntimeException {
-        Users result = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            result = (Users) session.get(Users.class, id);
-        } finally {
-            if ((session != null) && (session.isOpen())) session.close();
-        }
-        return result;
-    }
-
-    @Override
     public void updateUser(Users users) throws DaoRuntimeException {
         Session session = null;
         try {
@@ -83,6 +70,19 @@ public class PostgreSqlUsersDao implements UsersDao {
         } finally {
             if ((session != null) && (session.isOpen())) session.close();
         }
+    }
+
+    @Override
+    public Users readUser(long id) throws DaoRuntimeException {
+        Users result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (Users) session.get(Users.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
     }
 
     @Override

@@ -7,7 +7,6 @@ import java.util.*;
 
 public interface TestsDao {
 
-
     void addTests(Tests tests) throws DaoRuntimeException;
 
     Tests readTests(long id) throws DaoRuntimeException;

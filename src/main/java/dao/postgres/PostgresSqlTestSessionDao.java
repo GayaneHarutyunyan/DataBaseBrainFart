@@ -10,7 +10,6 @@ import java.util.*;
 
 public class PostgresSqlTestSessionDao implements TestSessionDao {
 
-
     // private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PostgresSqlTestSessionDao.class.getName());
 
     @Override
@@ -26,21 +25,7 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
         }
     }
 
-    @Override
-    public TestSession readTestSession(long id) throws DaoRuntimeException {
-
-        TestSession result = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            result = (TestSession) session.get(TestSession.class, id);
-        } finally {
-            if ((session != null) && (session.isOpen())) session.close();
-        }
-        return result;
-    }
-
-    @Override
+  @Override
     public void updateTestSession(TestSession testSession) throws DaoRuntimeException {
         Session session = null;
         try {
@@ -64,6 +49,20 @@ public class PostgresSqlTestSessionDao implements TestSessionDao {
         } finally {
             if ((session != null) && (session.isOpen())) session.close();
         }
+    }
+
+    @Override
+    public TestSession readTestSession(long id) throws DaoRuntimeException {
+
+        TestSession result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (TestSession) session.get(TestSession.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
     }
 
     @Override

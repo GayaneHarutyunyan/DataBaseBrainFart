@@ -15,6 +15,7 @@ public class Factory {
     private QuestionConnectionsDao questionConnectionsDao;
     private AnswerOptionsDao answerOptionsDao;
     private AdminDao adminDao;
+    private PowersDao powersDao;
 
 
     private Factory() {
@@ -32,7 +33,7 @@ public class Factory {
 
     public TestSessionDao getTestSessionDao() {
         if (testSessionDao == null) testSessionDao = new PostgresSqlTestSessionDao();
-         return testSessionDao;
+        return testSessionDao;
     }
 
     public TestsDao getTestsDao() {
@@ -73,5 +74,10 @@ public class Factory {
     public QuestionConnectionsDao getQuestionConnectionsDao() {
         if (questionConnectionsDao == null) questionConnectionsDao = new PostgreSqlQuestionConnectionsDao();
         return questionConnectionsDao;
+    }
+
+    public PowersDao getPowersDao() {
+        if (powersDao == null) powersDao = new PosgreSqlPowersDao();
+        return powersDao;
     }
 }

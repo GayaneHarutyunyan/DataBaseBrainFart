@@ -30,19 +30,6 @@ public class PostgreSqlTestsDao implements TestsDao {
     }
 
     @Override
-    public Tests readTests(long id) throws DaoRuntimeException {
-        Tests result = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            result = (Tests) session.get(Tests.class, id);
-        } finally {
-            if ((session != null) && (session.isOpen())) session.close();
-        }
-        return result;
-    }
-
-    @Override
     public void updateTests(Tests tests) throws DaoRuntimeException {
         Session session = null;
         try {
@@ -66,6 +53,20 @@ public class PostgreSqlTestsDao implements TestsDao {
         } finally {
             if ((session != null) && (session.isOpen())) session.close();
         }
+    }
+
+
+    @Override
+    public Tests readTests(long id) throws DaoRuntimeException {
+        Tests result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = (Tests) session.get(Tests.class, id);
+        } finally {
+            if ((session != null) && (session.isOpen())) session.close();
+        }
+        return result;
     }
 
     @Override

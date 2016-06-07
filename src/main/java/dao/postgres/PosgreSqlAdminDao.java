@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.apache.log4j.*;
 import java.util.*;
 
-@Repository
 public class PosgreSqlAdminDao implements AdminDao {
     private static Logger log = Logger.getLogger(PosgreSqlAdminDao.class.getName());
 
