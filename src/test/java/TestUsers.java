@@ -1,20 +1,13 @@
-import model.Users;
-
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.*;
-
-import org.junit.*;
-import org.mockito.Mockito;
-
 public class TestUsers {
-    Users customer;
+    /*
+    User customer;
 
     @Before
     public void setUp() {
-       // customer = new Users("firstName", "secondName", "email", "phoneNumber");
+       // customer = new User("firstName", "secondName", "email", "phoneNumber");
     }
 
     @Test
@@ -38,9 +31,7 @@ public class TestUsers {
     }
 
 
-    /**
-     * Email
-     */
+
     @Test
     public void testSetNullEmail() {
         customer.setEmail(null);
@@ -58,9 +49,7 @@ public class TestUsers {
     }
 
 
-    /**
-     * PhoneNumber
-     */
+
 
 
     @Test
@@ -79,9 +68,6 @@ public class TestUsers {
         assertEquals("056", customer.getPhoneNumber());
     }
 
-    /**
-     * FirstName
-     */
 
     @Test
     public void testSetGetFirstName() {
@@ -89,9 +75,7 @@ public class TestUsers {
         assertEquals("name", customer.getFirstName());
     }
 
-    /**
-     * SecondName
-     */
+
     @Test
     public void testSetGetSecondName() {
         customer.setSecondName("name");
@@ -104,5 +88,5 @@ public class TestUsers {
         assertEquals(5, customer.getId());
     }
 
-
+*/
 }
