@@ -20,7 +20,7 @@ import java.util.Set;
 public class Role extends Model {
 
     @NotNull
-    @Min(value = 4)
+    @Enumerated(EnumType.STRING)
     @Column(name = "title", length = 40,insertable = false, updatable = false)
     private RoleList title;
 
