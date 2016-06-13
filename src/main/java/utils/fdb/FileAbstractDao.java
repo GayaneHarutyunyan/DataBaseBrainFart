@@ -1,6 +1,6 @@
 package utils.fdb;
 
-import accesors.FileDataSourceAccessor;
+import utils.FileDataSourceAccessor;
 import models.Model;
 
 

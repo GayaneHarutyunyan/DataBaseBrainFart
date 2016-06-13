@@ -13,7 +13,7 @@ import java.util.List;
 public class QuestionResultService {
 
     @Autowired
-    @Qualifier("questionResutDatabaseDao")
+    @Qualifier("questionResultDatabaseDao")
     private QuestionResultDao questionResultDao;
 
 

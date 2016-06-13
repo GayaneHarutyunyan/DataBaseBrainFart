@@ -1,9 +1,8 @@
 package helpers;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
@@ -11,9 +10,67 @@ import java.security.NoSuchAlgorithmException;
  */
 
 @Component(value = "passwordHelper")
-public class PasswordHelper implements PasswordEncoder {
+public class PasswordHelper {
+
+    //текст для хеширования
+    public static final String TEXT = "admin";
+
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        System.out.println("Текст в шестнадцатеричном виде : " + md5ApacheExample(TEXT));
+    }
+
+
+    private static String md5ApacheExample(String text) {
+        return DigestUtils.md5Hex(text);
+    }
+}
+
+
+    /*
+
 
     private MessageDigest messageDigest;
+
+
+    public static String md5Custom(String st) {
+        MessageDigest messageDigest = null;
+        byte[] digest = new byte[0];
+
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.reset();
+            messageDigest.update(st.getBytes());
+            digest = messageDigest.digest();
+        } catch (NoSuchAlgorithmException e) {
+            // тут можно обработать ошибку
+            // возникает она если в передаваемый алгоритм в getInstance(,,,) не существует
+            e.printStackTrace();
+        }
+
+        BigInteger bigInt = new BigInteger(1, digest);
+        String md5Hex = bigInt.toString(16);
+
+        while (md5Hex.length() < 32) {
+            md5Hex = "0" + md5Hex;
+        }
+
+        return md5Hex;
+    }
+
+    public static String md5Apache(String st) {
+        String md5Hex = DigestUtils.md5Hex(st);
+
+        return md5Hex;
+    }
+    public static void main(String[] args) {
+        String st = "devcolibri";
+
+        System.out.println("Custom MD5:");
+        System.out.println(MD5Util.md5Custom(st));
+        System.out.println("Apache MD5:");
+        System.out.println(MD5Util.md5Apache(st));
+    }
+
 
     public PasswordHelper() {
         try {
@@ -48,9 +105,35 @@ public class PasswordHelper implements PasswordEncoder {
         return hexString.toString();
     }
 
+
     public static void main(String[] args) {
         System.out.println(hash("admin"));
+        System.out.println(hash("user"));
     }
+public static String md5Custom(String st) {
+    MessageDigest messageDigest = null;
+    byte[] digest = new byte[0];
+
+    try {
+        messageDigest = MessageDigest.getInstance("MD5");
+        messageDigest.reset();
+        messageDigest.update(st.getBytes());
+        digest = messageDigest.digest();
+    } catch (NoSuchAlgorithmException e) {
+        // тут можно обработать ошибку
+        // возникает она если в передаваемый алгоритм в getInstance(,,,) не существует
+        e.printStackTrace();
+    }
+
+    BigInteger bigInt = new BigInteger(1, digest);
+    String md5Hex = bigInt.toString(16);
+
+    while( md5Hex.length() < 32 ){
+        md5Hex = "0" + md5Hex;
+    }
+
+    return md5Hex;
+}
 
     @Override
     public String encode(CharSequence rawPassword) {
@@ -76,3 +159,4 @@ public class PasswordHelper implements PasswordEncoder {
         return encode(rawPassword).equals(encodedPassword);
     }
 }
+*/

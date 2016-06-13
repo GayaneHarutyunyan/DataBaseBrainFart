@@ -19,7 +19,7 @@ public class TestAvailabilityService {
     public TestAvailabilityService() {
     }
 
-@Transactional
+    @Transactional
     public List<TestAvailability> getAll() {
         return testAvailabilityDao.getAll();
     }

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import utils.HibernateUtil;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -15,6 +16,11 @@ public abstract class HibernateAbstractDao<T extends Model> {
     private SessionFactory sessionFactory;
     private Class<T> clazz;
 
+    public static void main(String[] args) {
+
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        sessionFactory.close();
+    }
 
     @SuppressWarnings("unchecked")
     public HibernateAbstractDao(){
